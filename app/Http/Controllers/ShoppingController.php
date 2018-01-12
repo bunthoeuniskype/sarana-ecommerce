@@ -15,6 +15,7 @@ use Session;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Redirect;
+use App\Fav;
 
 class ShoppingController extends Controller
 {
@@ -111,7 +112,7 @@ public function CheckOut()
 
     $oldCart=Session::get('cart');
     $cart=new Cart($oldCart);
-    return view('shoppingcheckout',['totalPrice'=>$cart->totalPrice]);
+    return view('site.shoppingcheckout',['totalPrice'=>$cart->totalPrice]);
   }
 }
 
@@ -214,5 +215,31 @@ $order->save();
  }
 
 }
+
+ public function favoriteProduct()
+       {
+
+
+        $cid = Session::get('customer')->id;
+
+        $fav = Fav::where('user_id',$cid)->get();
+               
+        $products = array();
+
+        foreach ($fav as $key => $value) {
+          $products[] = $value->product;
+        }
+     
+        $paginate = false; 
+       
+        $list = "favorite";
+        if(count($products)>30) {
+           foreach ($fav as $key => $value) {
+          $products[] = $value->product;
+          }
+          $paginate = true;
+        }
+         return view('site.product_list',compact('products','list','paginate'));
+       }
 
 }

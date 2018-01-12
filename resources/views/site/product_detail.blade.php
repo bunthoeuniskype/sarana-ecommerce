@@ -1,6 +1,11 @@
 @extends('site.layout.master')
 
 @section('content')
+
+<?php
+use App\Http\Classes\MakeDateClass;
+?>
+
 <div class="span9">
 
     <ul class="breadcrumb">
@@ -36,7 +41,7 @@
 			  -->
               </div>
 			  
-			 <div class="btn-toolbar">
+			<!--  <div class="btn-toolbar">
 			  <div class="btn-group">
 				<span class="btn"><i class="icon-envelope"></i></span>
 				<span class="btn" ><i class="icon-print"></i></span>
@@ -45,10 +50,10 @@
 				<span class="btn" ><i class=" icon-thumbs-up"></i></span>
 				<span class="btn" ><i class="icon-thumbs-down"></i></span>
 			  </div>
-			</div>
+			</div> -->
 			</div>
 			<div class="span6">
-				<h3>{{$product->name}}</h3>
+				<span><h3>{{$product->name}}</h3> <span>Created Date : {{MakeDateClass::time_elapsed_string($product->created_at)}} {{$product->created_at}}</span></span>
 				<!-- <small>- (14MP, 18x Optical Zoom) 3-inch LCD</small> -->
 				<hr class="soft"/>
 				<form class="form-horizontal qtyFrm">

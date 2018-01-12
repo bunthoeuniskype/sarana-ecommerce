@@ -41,9 +41,8 @@
  <!-- Authentication Links -->
               <a class="btn btn-mini btn-primary" href="{{url('admin')}}">Login Administrator</a> |
              @if (!Session::has('customer'))
-                   <a class="btn btn-mini btn-primary" href="#login" data-toggle="modal">Login</a> | <a class="btn btn-mini btn-success"  href="#register" data-toggle="modal">Register</a>
-              @include('site.form.login')
-              @include('site.form.register')
+                   <a class="btn btn-mini btn-primary" href="{{url('customerlogin')}}">Login</a> | <a class="btn btn-mini btn-success"  href="customersignup">Register</a>
+          
               @else
                     Welcome!<strong>  {{ Session::get('customer')->name }} </strong>
                      | <a href="{{ url('customerprofile') }}"><i class="fa fa-btn fa-user"></i> Profile</a>

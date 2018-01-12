@@ -1,20 +1,29 @@
-@extends('mastershopping')
+@extends('site.layout.master')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+
+            <div class="panel panel-default panel-login" >
+                <div class="panel-heading"><h3>Login</h3></div>
                 <div class="panel-body">
+
+                @include('errors.errors')
+                @if(Session::has('login'))
+                        <div class="alert alert-warning">
+                        <em>{!! Session('login') !!}</em>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                            <span aria-hidden="true">&times</span>
+                        </button>
+                        </div>
+                 @endif
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/customerlogin') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label">UserName</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}">
 
                             </div>
                         </div>
@@ -45,13 +54,15 @@
                                     <i class="fa fa-btn fa-sign-in"></i> Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                                <a href="{{url('customersignup')}}" class="btn btn-success">
+                                    <i class="fa fa-btn fa-sign-up"></i> Register
+                                </a>
+
+                               
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+
 @endsection

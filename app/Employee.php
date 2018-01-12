@@ -39,6 +39,7 @@ public function get_summary()
 {
    return DB::table($this->table)->select(DB::raw('COUNT(*) as total'))->where('status',1)->first();
 }
+
 }
 
             

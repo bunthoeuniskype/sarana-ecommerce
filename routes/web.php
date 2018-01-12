@@ -11,6 +11,11 @@
 |
 */
 
+//Route::get('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => 'AddMoneyController@payWithPaypal','middleware' => 'checkout',));
+Route::get('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => 'AddMoneyController@postPaymentWithpaypal','middleware' => 'checkout'));
+Route::get('paypal', array('as' => 'payment.status','uses' => 'AddMoneyController@getPaymentStatus','middleware' => 'checkout','middleware' => 'checkout'));
+
+
 Route::get('admin/product/select_product_unit',['uses'=>'ProductController@select_product_unit','as'=>'select_product_unit']);
 Route::get('admin/product/select_product_color',['uses'=>'ProductController@select_product_color','as'=>'select_product_color']);
 Route::get('admin/product/select_product_barcode',['uses'=>'ProductController@select_product_barcode','as'=>'select_product_barcode']);
@@ -27,6 +32,17 @@ Route::get('/locale', array(
 
 
 Route::group(['middleware' => ['web']], function () {	
+
+Route::get('/customersignup', 'Customercontroller@getSignup');
+Route::post('/customersignup', 'Customercontroller@postSignup');
+Route::get('/customerlogin', 'Customercontroller@getLogin');
+Route::post('/customerlogin', ['uses'=>'Customercontroller@postLogin',
+							 'as'=>'customer.postLogin']);
+Route::get('/customerlogout', 'Customercontroller@logout');
+Route::get('/customerprofile', 'Customercontroller@profile');
+
+
+Route::get('/favorite', 'ShoppingController@favoriteProduct');
 
 //site
 Route::get('/', 'ShoppingController@index');

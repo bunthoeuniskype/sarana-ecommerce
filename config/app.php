@@ -167,7 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
-        ArtemSchander\L5Modular\ModuleServiceProvider::class,
+        
         Collective\Html\HtmlServiceProvider::class,
         Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,

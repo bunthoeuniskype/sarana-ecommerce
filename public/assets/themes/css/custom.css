@@ -61,3 +61,16 @@ bootstrap.min.css:633
     background-color: #428bca;
     border-color: #428bca;
 }
+
+.form-horizontal .control-label {
+    float: left;
+    width: 160px;
+    padding-top: 5px;
+    text-align: left;
+}
+.panel-login{
+    width: 50%;
+    margin-left: 25%;
+    padding: 4%;
+    border: 1px solid;
+}

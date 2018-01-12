@@ -27,18 +27,14 @@ class CustomerController extends Controller
             return $order;
         });
 
-   return view('customerprofile',compact('orders'));
+   return view('site.customerprofile',compact('orders'));
     }
 
     public function getLogin(Request $request)
     {
-       return view('customerlogin');
+       return view('site.customerlogin');
     }
-       public function getLogin_app(Request $request)
-    {
-       return view('customerlogin_app');
-    }
-
+    
       public function logout(Request $request)
     {
         Session::forget('customer');
@@ -47,10 +43,10 @@ class CustomerController extends Controller
 
      public function PostLogin(Request $request)
     {
-        $email = $request->email;
+        $username = $request->username;
         $password = $request->password;
 
-        $customers = Customer::where('email','=', $email)
+        $customers = Customer::where('username','=', $username)
                                     ->where('password','=',$password)
                                     ->first();
 
@@ -65,15 +61,36 @@ class CustomerController extends Controller
             Session::flash('login','Invalid Email and Password!');
             return redirect::to($oldUrl);
         }else{
-           return view('customerprofile');
+           return view('site.customerprofile');
         }
         
        
     }
-     public function GetRegister(Request $request)
+     public function getSignup(Request $request)
     {
-       return view('customerlogin');
+       return view('site.customersignup');
     }
+
+    public function postSignup(Request $request)
+    {
+          $this->validate($request,[           
+            'username' => 'required|unique:customer,username', 
+            'email' => 'required|email|unique:customer,email',
+            'phone' => 'required',
+            'password' => 'required|max:30|min:6|same:confirm_password',
+            'agree'  => 'required',
+            ]); 
+
+          $cust = new Customer;     
+          $cust->username = $request->username;
+          $cust->password = $request->password;
+          $cust->email = $request->email;
+          $cust->phone = $request->phone;     
+          $cust->save();
+      Session::flash('save','Save is Successfully !');
+      return redirect('customerlogin');
+    }   
+
 
      public function PostRegister(Request $request)
     {
@@ -137,4 +154,7 @@ class CustomerController extends Controller
         $customer->delete();
     	return redirect('customer');
     }
+
+
+    
 }
