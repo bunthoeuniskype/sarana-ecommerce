@@ -38,7 +38,7 @@ class CustomerController extends Controller
       public function logout(Request $request)
     {
         Session::forget('customer');
-       return redirect('shopping');
+       return redirect('/');
     }
 
      public function PostLogin(Request $request)
@@ -90,13 +90,6 @@ class CustomerController extends Controller
       Session::flash('save','Save is Successfully !');
       return redirect('customerlogin');
     }   
-
-
-     public function PostRegister(Request $request)
-    {
-       return view('customerlogin');
-    }
-
 
 
     public function index(Request $request){
