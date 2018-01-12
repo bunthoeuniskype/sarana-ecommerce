@@ -20,8 +20,6 @@ use App\Fav;
 class ShoppingController extends Controller
 {
 
-
-
   public function index()
    {
       $paginate = false;

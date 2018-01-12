@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use Mail;
-use Session;
+
 use App\Http\Requests;
 use Illuminate\Http\Request;
 

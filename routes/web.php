@@ -10,9 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('test','TestController@testview');
+Route::post('test-form','TestController@test');
 //Route::get('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => 'AddMoneyController@payWithPaypal','middleware' => 'checkout',));
-Route::get('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => 'AddMoneyController@postPaymentWithpaypal','middleware' => 'checkout'));
+Route::post('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => 'AddMoneyController@postPaymentWithpaypal','middleware' => 'checkout'));
 Route::get('paypal', array('as' => 'payment.status','uses' => 'AddMoneyController@getPaymentStatus','middleware' => 'checkout','middleware' => 'checkout'));
 
 
@@ -33,13 +34,13 @@ Route::get('/locale', array(
 
 Route::group(['middleware' => ['web']], function () {	
 
-Route::get('/customersignup', 'Customercontroller@getSignup');
-Route::post('/customersignup', 'Customercontroller@postSignup');
-Route::get('/customerlogin', 'Customercontroller@getLogin');
-Route::post('/customerlogin', ['uses'=>'Customercontroller@postLogin',
+Route::get('/customersignup', 'CustomerController@getSignup');
+Route::post('/customersignup', 'CustomerController@postSignup');
+Route::get('/customerlogin', 'CustomerController@getLogin');
+Route::post('/customerlogin', ['uses'=>'CustomerController@postLogin',
 							 'as'=>'customer.postLogin']);
-Route::get('/customerlogout', 'Customercontroller@logout');
-Route::get('/customerprofile', 'Customercontroller@profile');
+Route::get('/customerlogout', 'CustomerController@logout');
+Route::get('/customerprofile', 'CustomerController@profile');
 
 
 Route::get('/favorite', 'ShoppingController@favoriteProduct');

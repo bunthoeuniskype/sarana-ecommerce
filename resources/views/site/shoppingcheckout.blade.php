@@ -16,9 +16,10 @@
                 <div class="panel-body">    
                       <div class="row" style="margin-top:15px;">
                             <div class="col-xs-12">
-                                <a href="{{route('addmoney.paywithpaypal')}}"><button class="subscribe btn btn-primary btn-lg btn-block" type="button">Payment With Paypal ${{ $totalPrice }}</button></a>
+                                {{Form::open(array('url'=>route('addmoney.paywithpaypal'),'method'=>'POST'))}}
+                                   <button class="subscribe btn btn-primary btn-lg btn-block" type="submit">Payment With Paypal ${{ $totalPrice }}</button>
+                                {{Form::close()}}
                             </div>
-
                             <div class="col-xs-12" style="margin-top:15px;">
                               <a href="{{url('only-order')}}">  <button class="subscribe btn btn-success btn-lg btn-block" type="button">Only Order Payment Later ${{ $totalPrice }}</button></a>
                             </div>
