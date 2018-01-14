@@ -11,6 +11,7 @@ use App\Http\Requests\CustomerRequest;
 use File;
 use Redirect;
 use App\Orders;
+use Auth;
 class CustomerController extends Controller
 {
     public function __construct()
@@ -20,7 +21,8 @@ class CustomerController extends Controller
     
   public function profile(Request $request)
     {
-        $orders = Orders::where('customer_id', Session::get('customer')->id)->get();
+
+        $orders = Orders::where('customer_id', Auth::guard('customer')->user()->id)->get();
         $orders->transform(function($order,$key)
         {
             $order->cart = unserialize( $order->cart);
@@ -83,7 +85,7 @@ class CustomerController extends Controller
 
           $cust = new Customer;     
           $cust->username = $request->username;
-          $cust->password = $request->password;
+          $cust->password =  bcrypt($request->password);
           $cust->email = $request->email;
           $cust->phone = $request->phone;     
           $cust->save();

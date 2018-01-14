@@ -16,6 +16,7 @@ use Stripe\Stripe;
 use Stripe\Charge;
 use Redirect;
 use App\Fav;
+use Auth;
 
 class ShoppingController extends Controller
 {
@@ -105,18 +106,16 @@ class ShoppingController extends Controller
 public function CheckOut()
 {
   if(!Session::has('cart')){
-    return view('shopping');
+    return view('customerprofile');
   }else{
 
     $oldCart=Session::get('cart');
     $cart=new Cart($oldCart);
-    return view('site.shoppingcheckout',['totalPrice'=>$cart->totalPrice]);
+    return view('site.shoppingcheckout',['totalPrice'=>$cart->totalPrice,'totalQty'=>$cart->totalQty]);
   }
 }
 
-
-
-   public function AddToCart(Request $request,$id)
+public function AddToCart(Request $request,$id)
    {
    	$products = Product::find($id);
    	$oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -212,6 +211,11 @@ $order->save();
 
  }
 
+}
+
+public function cancelCart(){
+  Session::forget('cart');
+  return redirect('/');
 }
 
  public function favoriteProduct()

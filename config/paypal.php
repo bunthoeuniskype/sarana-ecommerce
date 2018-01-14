@@ -16,7 +16,7 @@ return array(
     /**
     * Specify the max request time in seconds
     */
-    'http.ConnectionTimeOut' => 1000,
+    'http.ConnectionTimeOut' => 3000,
     /**
     * Whether want to log to a file
     */

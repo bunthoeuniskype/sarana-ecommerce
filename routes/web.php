@@ -10,16 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('test','TestController@testview');
-Route::post('test-form','TestController@test');
-//Route::get('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => 'AddMoneyController@payWithPaypal','middleware' => 'checkout',));
-Route::post('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => 'AddMoneyController@postPaymentWithpaypal','middleware' => 'checkout'));
-Route::get('paypal', array('as' => 'payment.status','uses' => 'AddMoneyController@getPaymentStatus','middleware' => 'checkout','middleware' => 'checkout'));
-
-
-Route::get('admin/product/select_product_unit',['uses'=>'ProductController@select_product_unit','as'=>'select_product_unit']);
-Route::get('admin/product/select_product_color',['uses'=>'ProductController@select_product_color','as'=>'select_product_color']);
-Route::get('admin/product/select_product_barcode',['uses'=>'ProductController@select_product_barcode','as'=>'select_product_barcode']);
 
 
 Route::post('/locale', array(
@@ -31,16 +21,45 @@ Route::get('/locale', array(
     'uses' => 'LanguageController@index'
      ));
 
+Route::group(['middleware' => ['checkout']], function () {	
+
+Route::get('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => 'AddMoneyController@payWithPaypal',));
+Route::post('paypal', array('as' => 'addmoney.paypal','uses' => 'AddMoneyController@postPaymentWithpaypal',));
+Route::get('paypal', array('as' => 'payment.status','uses' => 'AddMoneyController@getPaymentStatus',));
+
+Route::get('cancelCart', 'ShoppingController@cancelCart');
+Route::get('/checkout', array(
+	'uses' => 'ShoppingController@CheckOut',
+	'as' => 'shopping.checkout'
+	 ));
+Route::get('/customerlogout', ['as'=>'customer.logout','uses'=>'Auth\LoginCustomerController@logout']);
+Route::get('/customerprofile', 'CustomerController@profile')->name('customer');
+
+Route::get('/getcart', array(
+	'uses' => 'ShoppingController@getCart',
+	'as' => 'shopping.getcart'
+	 ));
+	 
+});
+
 
 Route::group(['middleware' => ['web']], function () {	
 
+Route::get('/redirect', 'SocialAuthFacebookController@redirect');
+Route::get('/callback', 'SocialAuthFacebookController@callback');
+Route::get('/customerlogin', ['as'=>'customer.login','uses'=>'Auth\LoginCustomerController@getLogin']);
+Route::post('/customerlogin', ['uses'=>'Auth\LoginCustomerController@login','as'=>'customer.postLogin']);
+
 Route::get('/customersignup', 'CustomerController@getSignup');
 Route::post('/customersignup', 'CustomerController@postSignup');
-Route::get('/customerlogin', 'CustomerController@getLogin');
-Route::post('/customerlogin', ['uses'=>'CustomerController@postLogin',
-							 'as'=>'customer.postLogin']);
-Route::get('/customerlogout', 'CustomerController@logout');
-Route::get('/customerprofile', 'CustomerController@profile');
+
+Route::get('test','TestController@testview');
+Route::post('test-form','TestController@test');
+
+Route::get('admin/product/select_product_unit',['uses'=>'ProductController@select_product_unit','as'=>'select_product_unit']);
+Route::get('admin/product/select_product_color',['uses'=>'ProductController@select_product_color','as'=>'select_product_color']);
+Route::get('admin/product/select_product_barcode',['uses'=>'ProductController@select_product_barcode','as'=>'select_product_barcode']);
+
 
 
 Route::get('/favorite', 'ShoppingController@favoriteProduct');
@@ -72,26 +91,12 @@ Route::get('/remove/{id}', array(
 	 ));
 
 
-Route::get('/getcart', array(
-	'uses' => 'ShoppingController@getCart',
-	'as' => 'shopping.getcart'
-	 ));
 
-Route::get('/checkout', array(
-	'middleware' => 'checkout',
-	'uses' => 'ShoppingController@CheckOut',
-	'as' => 'shopping.checkout'
-	 ));
+
 
 Route::get('product/detail/{slug}','ShoppingController@detail');
 
 Route::get('search','ShoppingController@search');
-
-//end site
-/*Route::get('/', function(){
-	return redirect('admin/login');
-});*/
-
 
 Route::get('admin/login',['uses'=>'UserController@getLogin','as'=>'login']);
 Route::post('user/login',['uses'=>'UserController@login','as'=>'user.login']);

@@ -40,11 +40,11 @@
   <div class="span6">
  <!-- Authentication Links -->
               <a class="btn btn-mini btn-primary" href="{{url('admin')}}">Login Administrator</a> |
-             @if (!Session::has('customer'))
+             @if (!Auth::guard('customer')->check())
                    <a class="btn btn-mini btn-primary" href="{{url('customerlogin')}}">Login</a> | <a class="btn btn-mini btn-success"  href="customersignup">Register</a>
           
               @else
-                    Welcome!<strong>  {{ Session::get('customer')->name }} </strong>
+                    Welcome!<strong>  {{ Auth::guard('customer')->user()->name }} </strong>
                      | <a href="{{ url('customerprofile') }}"><i class="fa fa-btn fa-user"></i> Profile</a>
                      | <a href="{{ url('customerlogout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a>
              @endif

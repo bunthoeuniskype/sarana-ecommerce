@@ -58,6 +58,7 @@
                                     <i class="fa fa-btn fa-sign-up"></i> Register
                                 </a>
 
+                                 <a href="{{url('/redirect')}}" class="btn btn-primary">Login with Facebook</a>
                                
                             </div>
                         </div>

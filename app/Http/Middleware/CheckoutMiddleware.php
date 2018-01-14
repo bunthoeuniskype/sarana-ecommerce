@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Session;
 use redirect;
+use Auth;
 class CheckoutMiddleware
 {
     /**
@@ -16,7 +17,7 @@ class CheckoutMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!Session::has('customer')) {
+            if (!Auth::guard('customer')->check()) {
             Session::put('oldUrl',$request->url());
              return redirect('customerlogin');
             }

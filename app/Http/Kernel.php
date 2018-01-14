@@ -61,6 +61,6 @@ class Kernel extends HttpKernel
 
         'check-permission' => \App\Http\Middleware\CheckPermission::class,
         'checkout' => \App\Http\Middleware\CheckoutMiddleware::class,
-        'checkout-app' => \App\Http\Middleware\CheckoutAppMiddleware::class,
+        
     ];
 }

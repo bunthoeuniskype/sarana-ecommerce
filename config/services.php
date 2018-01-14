@@ -30,9 +30,14 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
+        'model' => App\CustomerAuth::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
+    ],
+    'facebook' => [
+    'client_id' => '832483926933297',
+    'client_secret' => '574a95f08cbc0194ad618b50b90a7e35',
+    'redirect' => 'http://localhost/mis_sarana/callback',
     ],
 
 ];
