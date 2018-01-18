@@ -195,7 +195,7 @@ class SaleController extends Controller
          $sale= Sale::findOrFail($id);
          $saledetail = SaleDetail::where('sale_id',$sale->id)->get();
         
-         return view('admin.Sale.complete')   
+         return view('admin.sale.complete')   
             ->with('sale', $sale)    
             ->with('exchange', $exchange)          
             ->with('saledetail', $saledetail); 

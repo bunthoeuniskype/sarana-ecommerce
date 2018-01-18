@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::post('/locale', array(
     'Middleware' => 'LanguagesMiddleware',
     'uses' => 'LanguageController@index'

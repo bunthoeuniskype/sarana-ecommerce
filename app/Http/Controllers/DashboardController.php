@@ -16,7 +16,7 @@ use App\ExpenseIncome;
 use App\Inventory;
 use App\Sale;
 use App\Purchase;
-use App\Http\Classes\BackupDB;
+use App\Http\Classes\RestoreDB;
 use DB;
 
 class DashboardController extends Controller

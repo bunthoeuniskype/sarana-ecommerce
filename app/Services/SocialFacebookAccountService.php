@@ -7,11 +7,18 @@ class SocialFacebookAccountService
 {
     public function createOrGetUser(ProviderUser $providerUser)
     {
+        
+        $userLogin = array();
+         
         $account = SocialFacebookAccount::whereProvider('facebook')
             ->whereProviderUserId($providerUser->getId())
             ->first();
+            
         if ($account) {
-            return $account->user;
+            $userLogin['password'] = $providerUser->getId();
+            $userLogin['email'] = $providerUser->getEmail();
+            return $userLogin;
+            //return $account->user;
         } else {
             $account = new SocialFacebookAccount([
                 'provider_user_id' => $providerUser->getId(),
@@ -21,13 +28,17 @@ class SocialFacebookAccountService
             if (!$user) {
                 $user = CustomerAuth::create([
                     'email' => $providerUser->getEmail(),
-                    'usernmae' => $providerUser->getName(),
-                    'password' => bcrypt(rand(1,10000)),
+                    'username' => $providerUser->getName(),
+                    'password' => bcrypt($providerUser->getId())
                 ]);
             }
             $account->user()->associate($user);
             $account->save();
-            return $user;
+            
+            $userLogin['password'] = $providerUser->getId();
+            $userLogin['email'] = $providerUser->getEmail();
+            
+            return $userLogin;
         }
     }
 }
