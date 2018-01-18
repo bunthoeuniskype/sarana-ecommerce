@@ -44,7 +44,7 @@
                    <a class="btn btn-mini btn-primary" href="{{url('customerlogin')}}">Login</a> | <a class="btn btn-mini btn-success"  href="customersignup">Register</a>
           
               @else
-                    Welcome!<strong>  {{ Auth::guard('customer')->user()->name }} </strong>
+                    Welcome!<strong>  {{ Auth::guard('customer')->user()->username }} </strong>
                      | <a href="{{ url('customerprofile') }}"><i class="fa fa-btn fa-user"></i> Profile</a>
                      | <a href="{{ url('customerlogout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a>
              @endif

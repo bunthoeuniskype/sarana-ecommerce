@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\LogHistory;
+use Carbon\Carbon;
 
 class Kernel extends ConsoleKernel
 {
@@ -26,6 +28,16 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->call(function () {
+
+          $l = new LogHistory();
+          $l->date = Carbon::now();
+          $l->user_id = 1;
+          $l->ip_address = 1;
+          $l->status = 1;
+          $l->save();
+          
+        })->everyMinute();
     }
 
     /**

@@ -8,6 +8,8 @@ class SocialFacebookAccountService
     public function createOrGetUser(ProviderUser $providerUser)
     {
         
+        dd($providerUser);
+
         $userLogin = array();
          
         $account = SocialFacebookAccount::whereProvider('facebook')
@@ -28,8 +30,9 @@ class SocialFacebookAccountService
             if (!$user) {
                 $user = CustomerAuth::create([
                     'email' => $providerUser->getEmail(),
+                    'image_socail' => $providerUser->getAvatar(),
                     'username' => $providerUser->getName(),
-                    'password' => bcrypt($providerUser->getId())
+                    'password_socail' => bcrypt($providerUser->getId())
                 ]);
             }
             $account->user()->associate($user);
