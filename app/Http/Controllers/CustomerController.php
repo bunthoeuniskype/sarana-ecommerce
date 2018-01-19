@@ -22,10 +22,10 @@ class CustomerController extends Controller
   public function profile(Request $request)
     {
 
-        $orders = Orders::where('customer_id', Auth::guard('customer')->user()->id)->get();
+        $orders = Orders::where('customer_id', Auth::guard('customer')->user()->id)->orderBy('id','desc')->get();
         $orders->transform(function($order,$key)
         {
-            $order->cart = unserialize( $order->cart);
+            $order->cart = unserialize($order->cart);
             return $order;
         });
 
@@ -39,7 +39,7 @@ class CustomerController extends Controller
     
       public function logout(Request $request)
     {
-        Session::forget('customer');
+       Session::forget('customer');
        return redirect('/');
     }
 

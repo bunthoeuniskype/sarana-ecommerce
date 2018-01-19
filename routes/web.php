@@ -31,16 +31,17 @@ Route::get('/checkout', array(
 	'uses' => 'ShoppingController@CheckOut',
 	'as' => 'shopping.checkout'
 	 ));
+
+Route::get('order-items', ['uses'=>'ShoppingController@OrdersItems','as'=>'order.items']);
+
 Route::get('/customerlogout', ['as'=>'customer.logout','uses'=>'Auth\LoginCustomerController@logout']);
 Route::get('/customerprofile', 'CustomerController@profile')->name('customer');
 
 Route::get('/getcart', array(
 	'uses' => 'ShoppingController@getCart',
 	'as' => 'shopping.getcart'
-	 ));
-	 
+	 ));	 
 });
-
 
 Route::group(['middleware' => ['web']], function () {	
 
@@ -59,8 +60,6 @@ Route::get('admin/product/select_product_unit',['uses'=>'ProductController@selec
 Route::get('admin/product/select_product_color',['uses'=>'ProductController@select_product_color','as'=>'select_product_color']);
 Route::get('admin/product/select_product_barcode',['uses'=>'ProductController@select_product_barcode','as'=>'select_product_barcode']);
 
-
-
 Route::get('/favorite', 'ShoppingController@favoriteProduct');
 
 //site
@@ -72,7 +71,6 @@ Route::get('/addtocart/{id}', array(
 	'uses' => 'ShoppingController@AddToCart',
 	'as' => 'shopping.addtocart'
 	 ));
-
 
 Route::get('/reducebyone/{id}', array(
 	'uses' => 'ShoppingController@getReduceByOne',
@@ -89,10 +87,6 @@ Route::get('/remove/{id}', array(
 	'as' => 'shopping.remove'
 	 ));
 
-
-
-
-
 Route::get('product/detail/{slug}','ShoppingController@detail');
 
 Route::get('search','ShoppingController@search');
@@ -102,9 +96,7 @@ Route::post('user/login',['uses'=>'UserController@login','as'=>'user.login']);
 });
 
 Route::group(['middleware'=>'auth'], function () {
-
-//admin
-	
+//admin	
 Route::get('user/logout',['uses'=>'UserController@logout','as'=>'user.logout']);
 
 Route::resource('admin/advertisement','AdsController');

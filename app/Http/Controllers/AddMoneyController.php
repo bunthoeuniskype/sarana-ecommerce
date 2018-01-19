@@ -149,8 +149,7 @@ class AddMoneyController extends HomeController
         if ($result->getState() == 'approved') { 
             
             $oldCart=Session::get('cart');
-            $cart=new Cart($oldCart);
-            
+            $cart=new Cart($oldCart);            
 
             $order = new Orders();
             $order->customer_id = Auth::guard('customer')->user()->id;

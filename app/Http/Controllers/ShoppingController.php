@@ -218,22 +218,37 @@ public function cancelCart(){
   return redirect('/');
 }
 
- public function favoriteProduct()
+public function OrdersItems($value='')
+{
+            $oldCart=Session::get('cart');
+            $cart=new Cart($oldCart);            
+
+            $order = new Orders();
+            $order->customer_id = Auth::guard('customer')->user()->id;
+            $order->cart = serialize($cart);
+            $order->total_qty = $cart->totalQty;
+            $order->total_amount = $cart->totalPrice;
+            $order->payment_id = '###';
+            $order->status = 'No Paid';          
+            if($order->save()){
+              Session::forget('cart');
+              Session::flash('success','Your Order is Successfully');
+            }else{
+              Session::flash('error','Your Order is Failed');
+            }
+            return redirect('customerprofile');
+}
+
+public function favoriteProduct()
        {
 
-
         $cid = Session::get('customer')->id;
-
-        $fav = Fav::where('user_id',$cid)->get();
-               
+        $fav = Fav::where('user_id',$cid)->get();               
         $products = array();
-
         foreach ($fav as $key => $value) {
           $products[] = $value->product;
         }
-     
-        $paginate = false; 
-       
+       $paginate = false;        
         $list = "favorite";
         if(count($products)>30) {
            foreach ($fav as $key => $value) {

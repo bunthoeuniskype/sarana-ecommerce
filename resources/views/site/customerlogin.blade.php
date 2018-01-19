@@ -2,7 +2,9 @@
 
 @section('content')
 
-            <div class="panel panel-default panel-login" >
+        <div class="col-md-6 col-md-offset-3" style="border:1px solid; padding:5px; padding-left:15px; padding-bottom:25px">            
+        
+            <div class="panel panel-default" >
                 <div class="panel-heading"><h3>Login</h3></div>
                 <div class="panel-body">
 
@@ -28,10 +30,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
+                        <div class="form-group" >
+                            <label for="password" class="col-md-4 control-label" style="margin-top:3px;">Password</label>
+                            <div class="col-md-6" style="margin-top:3px;">
                                 <input id="password" type="password" class="form-control" name="password">
 
                             </div>
@@ -49,7 +50,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="col-md-10" style="float:right">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-sign-in"></i> Login
                                 </button>
@@ -65,5 +66,5 @@
                     </form>
                 </div>
             </div>
-
+        </div>
 @endsection

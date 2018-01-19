@@ -40,11 +40,11 @@
                                 {{Form::close()}}
                             </div>
                             <div class="col-xs-12" style="margin-top:15px;">
-                              <a href="{{url('only-order')}}">  <button class="subscribe btn btn-success btn-lg btn-block" type="button">Only Order Payment Later ${{ $totalPrice }}</button></a>
+                              <a href="{{route('order.items')}}">  <button class="subscribe btn btn-success btn-lg btn-block" type="button">Only Order Payment Later ${{ $totalPrice }}</button></a>
                             </div>
                         </div>
                 </div>
-                <div class="panel-footer text-center" style="margin-top:15px;">Please Come Back Our Shop </div>
+                <div class="panel-footer text-center text-primary" style="margin-top:15px;">Please Come Back Our Shop </div>
             </div>            
             <!-- CREDIT CARD FORM ENDS HERE -->
         </div>

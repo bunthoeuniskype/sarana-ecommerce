@@ -174,6 +174,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,    
         LaravelCaptcha\Providers\LaravelCaptchaServiceProvider::class,
         App\Providers\productAlertServiceProvider::class,
+        App\Providers\orderAlertServiceProvider::class,
         App\Providers\SiteMenuServiceProvider::class,
         App\Providers\SideBarLeftServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,

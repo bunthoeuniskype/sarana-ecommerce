@@ -41,7 +41,7 @@
 @foreach($products as $product)
 
                  <tr>
-                        <td class="col-sm-5 col-md-4">
+                        <td>
                             <div class="media">
                                 <a class="thumbnail pull-left" href="#"> 
                                 <img class="media-object" src="{{ asset($product['item']['image']) }}" style="height: 72px;"> </a>
@@ -53,22 +53,19 @@
                                     <span>Avaliable In Stock : </span><span class="text-success"><strong> {{ $product['item']['qty'] }}</strong></span>
                                 </div>
                             </div></td>
-                            <td class="col-sm-2 col-md-2" style="text-align: center">
-                           <div class="input-group">
-                             
+                            <td style="text-align: center">
+                           <div class="input-group">                             
                                 <span class="input-group-addon">
                                 <a href="{{ route('shopping.reducebyone', $product['item']['id']) }}"><i class=" fa fa-minus"></i></a></span>  
-
                                   <input style="width:40%"  type="number" readonly="true" class="form-control"  value="{{ $product['qty'] }}">   
-
                                    <span class="input-group-addon">
                                 <a href="{{ route('shopping.addbyone', $product['item']['id']) }}"><i class=" fa fa-plus"></i></a></span>
                                
                            </div>
                             </td>
-                            <td class="col-sm-2 col-md-2 text-center" style="white-space: nowrap;"><strong>$ {{ $product['item']['price'] }}</strong></td>
-                            <td class="col-sm-2 col-md-2 text-center" style="white-space: nowrap;"><strong>$ {{ $product['price'] }}</strong></td>
-                            <td class="col-sm-1 col-md-1">
+                            <td style="white-space: nowrap;"><strong>$ {{ $product['item']['price'] }}</strong></td>
+                            <td class="text-center" style="white-space: nowrap;"><strong>$ {{ $product['price'] }}</strong></td>
+                            <td>
                             <a href="{{ route('shopping.remove', $product['item']['id']) }}">
                             <button type="button" class="btn btn-danger">
                                 <span class="fa fa-remove"></span> remove

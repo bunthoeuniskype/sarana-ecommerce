@@ -154,7 +154,7 @@ function setNavigation() {
 
 <li>
           <a href="{{url('admin/setting')}}" title="">
-                 <i class="fa fa-cog" aria-hidden="true" style="padding-bottom: 3px;"></i>
+                 <i class="fa fa-th-large" aria-hidden="true" style="padding-bottom: 3px;"></i>
               <br>
             <b>{{ trans('common.other')}} </b>
            </a>
