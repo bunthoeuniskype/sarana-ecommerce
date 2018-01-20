@@ -1,6 +1,15 @@
 @extends('site.layout.master')
 
 @section('content')
+<?php use App\Exchange; 
+ $exchange = Exchange::whereStatus(1)->orderBy('id','desc')->first()->riel;
+ if($exchange){
+  $riel = $exchange;
+ }else{
+  $riel = 4000;
+ }
+?>
+
 <div class="span9">
 
     <ul class="breadcrumb">
@@ -35,7 +44,8 @@
 					</div>
 					<div class="span3 alignR">
 					<form class="form-horizontal qtyFrm">
-					<h3> {{ $value->price }}</h3>
+					<h4> $ {{ $value->price }} </h4>
+					 <h4> ៛​​ {{ $riel * $value->price}} <h4>
 					<div class="btn-group">
 					  <a href="{{ route('shopping.addtocart',['id'=>$value->id]) }}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
 					  <a href="{{url('product/detail/'.$value->slug)}}" class="btn btn-large"><i class="icon-zoom-in"></i></a>
@@ -54,7 +64,7 @@
 			          <a  href="{{url('product/detail/'.$value->slug)}}"><img src="{{$value->image==''?url('public/uploads/images/none.jpg'):url($value->image)}}" style="max-height: 120px" alt="{{ $value->name }}"></a>
 			          <div class="caption">
 			            <h5>{{ $value->name }}</h5>           
-			             <h4 style="text-align:center"><a class="btn" href="{{url('product/detail/'.$value->slug)}}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="{{ route('shopping.addtocart',['id'=>$value->id]) }}">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$ {{ $value->price }}</a></h4>
+			             <h4 style="text-align:center"><a class="btn" href="{{url('product/detail/'.$value->slug)}}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="{{ route('shopping.addtocart',['id'=>$value->id]) }}">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$ {{ $value->price }} <br> ៛​​ {{ $riel * $value->price}} </a></h4>
 			          </div>
 			          </div>
 			         </li>

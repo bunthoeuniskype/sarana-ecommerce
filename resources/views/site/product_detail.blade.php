@@ -4,6 +4,13 @@
 
 <?php
 use App\Http\Classes\MakeDateClass;
+use App\Exchange; 
+ $exchange = Exchange::whereStatus(1)->orderBy('id','desc')->first()->riel;
+ if($exchange){
+  $riel = $exchange;
+ }else{
+  $riel = 4000;
+ }
 ?>
 
 <div class="span9">
@@ -58,7 +65,7 @@ use App\Http\Classes\MakeDateClass;
 				<hr class="soft"/>
 				<form class="form-horizontal qtyFrm">
 				  <div class="control-group">
-					<label class="control-label"><span>Price : ${{$product->price}}</span></label>
+					<label class="control-label">Price : <h4><span> $ {{$product->price}}</span> <br> ៛ {{ $riel * $product->price }}</h4></label>
 					<div class="controls">
 					<!-- <input type="number" class="span1" value="1" placeholder="Qty."/> -->
 					  <a href="{{ route('shopping.addtocart',['id'=>$product->id]) }}" class="btn btn-xs btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></a>
@@ -124,7 +131,8 @@ use App\Http\Classes\MakeDateClass;
 					</div>
 					<div class="span3 alignR">
 					<form class="form-horizontal qtyFrm">
-					<h3> {{ $value->price }}</h3>
+					<h4>$ {{ $value->price }}</h4>
+					<h4>៛ {{ $riel * $value->price }}</h4>
 					<div class="btn-group">
 					  <a href="{{ route('shopping.addtocart',['id'=>$value->id]) }}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
 					  <a href="{{url('product/detail/'.$value->slug)}}" class="btn btn-large"><i class="icon-zoom-in"></i></a>
@@ -143,7 +151,7 @@ use App\Http\Classes\MakeDateClass;
 			          <a  href="{{url('product/detail/'.$value->slug)}}"><img src="{{$value->image==''?url('public/uploads/images/none.jpg'):url($value->image)}}" style="max-height: 120px" alt="{{ $value->name }}"></a>
 			          <div class="caption">
 			            <h5>{{ $value->name }}</h5>           
-			             <h4 style="text-align:center"><a class="btn" href="{{url('product/detail/'.$value->slug)}}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="{{ route('shopping.addtocart',['id'=>$value->id]) }}">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$ {{ $value->price }}</a></h4>
+			             <h4 style="text-align:center"><a class="btn" href="{{url('product/detail/'.$value->slug)}}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="{{ route('shopping.addtocart',['id'=>$value->id]) }}">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$ {{ $value->price }} <br> ៛ {{ $riel * $value->price }}</a></h4>
 			          </div>
 			          </div>
 			         </li>

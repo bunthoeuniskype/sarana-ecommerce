@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Contact;
+use Redirect;
+use App\User;
+
 class HomeController extends Controller
 {
     /**
@@ -24,5 +28,19 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function contact()
+    {
+        return view('site.contact');
+    }
+
+    public function feedback(Request $request)
+    {
+  
+        $f = new Contact();
+        $f::create($request->all());
+        \Session::flash('success','Message Send Successfully');
+        return Redirect::back();
     }
 }

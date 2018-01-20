@@ -24,4 +24,9 @@ public function get_summary()
    return DB::table($this->table)->select(DB::raw('COUNT(*) as total'))->where('status',1)->first();
 }
 
+static function getRiel($query)
+{
+	return Exchange::whereStatus(1)->get();	
+}
+
 }

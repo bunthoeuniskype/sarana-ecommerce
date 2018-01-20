@@ -45,6 +45,9 @@ Route::get('/getcart', array(
 
 Route::group(['middleware' => ['web']], function () {	
 
+Route::get('/contact', 'HomeController@contact');
+Route::post('/feedback', ['uses'=>'HomeController@feedback','as'=>'feedback']);
+
 Route::get('/redirect', 'SocialAuthFacebookController@redirect');
 Route::get('/callback', 'SocialAuthFacebookController@callback');
 Route::get('/customerlogin', ['as'=>'customer.login','uses'=>'Auth\LoginCustomerController@getLogin']);

@@ -52,6 +52,17 @@
   
   <div class="span6">
   <div class="pull-right">
+  <?php
+    use App\Exchange; 
+     $exchange = Exchange::whereStatus(1)->orderBy('id','desc')->first()->riel;
+     if($exchange){
+      $riel = $exchange;
+     }else{
+      $riel = 4000;
+     }
+    ?>
+  Exchange Rate : <span class="badge" style="color: white;">$1 = ៛​ {{$riel}}</span> | 
+
    {{trans('common.language')}} : <a href="{{url('locale?locale=kh')}}">{{trans('common.khmer')}}</a> |
    <a href="{{url('locale?locale=en')}}">{{trans('common.english')}}</a>
 
