@@ -107,6 +107,8 @@ Route::resource('admin/advertisement','AdsController');
 Route::get('admin','DashboardController@index');
 Route::get('admin/backup','DashboardController@backup');
 
+Route::get('admin/orders','OrderController@index');
+
 Route::resource('admin/category','CategoryController');
 Route::resource('admin/subcategory','SubCategoryController');
 Route::resource('admin/customer','CustomerController');

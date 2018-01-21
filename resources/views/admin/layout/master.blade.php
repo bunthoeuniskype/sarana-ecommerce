@@ -69,6 +69,7 @@
        {{ Form::Close() }}   
   </div>
   <div style="float:right">
+    <a class="btn btn-xs btn-primary" href="{{url('admin/orders')}}" style="margin-right: 5px; margin-top: 5px;">View Orders</a>
     @include('admin.main.productAlert') 
     @include('admin.main.orderAlert')
   </div>
