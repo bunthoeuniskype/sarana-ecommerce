@@ -12,6 +12,9 @@ use Input;
 use App\Cart;
 use App\Orders;
 use Auth;
+use App\Exchange;
+use Mail;
+
 /** All Paypal Details class **/
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
@@ -70,7 +73,7 @@ class AddMoneyController extends HomeController
     public function postPaymentWithpaypal(Request $request)
     {
 
-            $payer = new Payer();
+        $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
         $item_1 = new Item();
@@ -162,6 +165,10 @@ class AddMoneyController extends HomeController
 
             Session::forget('cart');
 
+            if(Auth::guard('customer')->user()->email !== ''){
+                $this->invoiceSend($order->id,Auth::guard('customer')->user()->email);
+            }
+
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
             \Session::put('success','Payment Success');
@@ -170,4 +177,53 @@ class AddMoneyController extends HomeController
         \Session::put('error','Payment failed');
         return Redirect::route('addmoney.paywithpaypal');
     }
+
+    public function OrdersItems()
+    {
+                $oldCart=Session::get('cart');
+                $cart=new Cart($oldCart);            
+
+                $order = new Orders();
+                $order->customer_id = Auth::guard('customer')->user()->id;
+                $order->cart = serialize($cart);
+                $order->total_qty = $cart->totalQty;
+                $order->total_amount = $cart->totalPrice;
+                $order->payment_id = '###';
+                $order->status = 'No Paid';          
+                if($order->save()){
+                  Session::forget('cart');
+                  if(Auth::guard('customer')->user()->email !== ''){
+                        $this->invoiceSend($order->id,Auth::guard('customer')->user()->email);
+                    }
+                  Session::flash('success','Your Order is Successfully');
+                }else{
+                  Session::flash('error','Your Order is Failed');
+                }
+                return redirect('customerprofile');
+    }
+
+   public function invoiceSend($id,$receiveby)
+    { 
+
+     $orders = Orders::where('id',$id)->get();         
+     $orders->transform(function($order,$key)
+        {
+            $order->cart = unserialize($order->cart);
+            return $order;
+        });
+
+      $exchange = Exchange::orderBy('id','desc')->first();
+
+     $subject = 'Payment Invoice From MIS';
+     $messages = 'Payment Invoice';
+
+      Mail::send('site.order_send_mail',compact('orders','exchange'), function ($message) use ($receiveby,$subject) {  
+        $message->to($receiveby)->subject($subject);       
+
+     });
+
+   // return view('site.order_send_mail',compact('orders','exchange'));
+    }
+
+
   }

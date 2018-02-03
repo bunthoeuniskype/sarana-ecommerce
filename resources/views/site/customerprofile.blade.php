@@ -41,7 +41,12 @@
                           @foreach ($orders as $order)
                            <table class="table table-responsive table-bordered">    
                               <tr>
-                                <td colspan="2">Payment ID :  {{ $order['payment_id'] }}</td>                  
+                                <td>Payment ID :  {{ $order['payment_id'] }}</td>   
+                                <td> 
+                                @if($order['status'] !== 'No Paid') 
+                                    <a class="btn btn-xs btn-primary pull-right" href="{{route('customer.invoice',base64_encode($order->id))}}"><i class="fa fa-search"></i> View Invoice </a>
+                                @endif
+                                </td>                 
                               </tr> 
                               <tr>
                                 <td>Total Qty :  {{ $order['total_qty'] }}</td>

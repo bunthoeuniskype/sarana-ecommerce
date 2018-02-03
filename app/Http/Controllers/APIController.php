@@ -6,7 +6,7 @@ use App\User;
 use Hash;
 use JWTAuth;
 use Input;
-
+use Auth;
 
 class APIController extends Controller
 {
@@ -14,6 +14,7 @@ class APIController extends Controller
 
     public function register(Request $request)
     {        
+   
     	$input = $request->all();
     	$input['password'] = Hash::make($input['password']);
     	User::create($input);
@@ -35,8 +36,10 @@ class APIController extends Controller
     {
 
     	//$input = $request->all();
-    	$data = Input::json();
-    	$user = JWTAuth::toUser($data->get('token'));
+    	/*$data = Input::json();
+    	$user = JWTAuth::toUser($data->get('token'));*/
+       // $user = JWTAuth::toUser($request->token);
+        $user = JWTAuth::parseToken()->authenticate();
         return response()->json(['result' => $user]);
 
     }
@@ -45,7 +48,6 @@ class APIController extends Controller
     	
     	$user = User::all();
         return response()->json(['result' => $user]);
-
     }
     
 

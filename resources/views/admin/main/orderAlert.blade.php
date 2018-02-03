@@ -3,7 +3,7 @@
             <ul class="dropdown-menu alert-dropdown">                    
                     @foreach($orderAlert as $ord)
 	                     <li>
-	                       <a href="#">{{ $ord->customer->username }} <span class="label text-primary">Total Qty : {{ $ord->total_qty }} => Total Amount : $ {{ $ord->total_amount }}</span></a>
+	                       <a href="{{url('admin/orders/check/'.$ord->id)}}">{{ $ord->customer->username }} <span class="label text-primary">Total Qty : {{ $ord->total_qty }} => Total Amount : $ {{ $ord->total_amount }}</span></a>
 	                     </li>
                     @endforeach                      
            </ul>

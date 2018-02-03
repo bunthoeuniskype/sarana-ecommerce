@@ -17,9 +17,12 @@ class authJWT
      */
     public function handle($request, Closure $next)
     { 
+
+       // dd($request->all());
         $data = Input::json();
         try {
-            $user = JWTAuth::toUser($data->get('token'));
+          //  $user = JWTAuth::toUser($data->get('token'));
+              $user = JWTAuth::parseToken()->authenticate();
         } catch (Exception $e) {
             if($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
                 return response()->json(['error'=>'Token is Invalid']);

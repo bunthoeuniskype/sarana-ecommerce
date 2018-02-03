@@ -12,6 +12,9 @@ use File;
 use Redirect;
 use App\Orders;
 use Auth;
+use App\Exchange;
+use Mail;
+
 class CustomerController extends Controller
 {
     public function __construct()
@@ -150,6 +153,19 @@ class CustomerController extends Controller
     	return redirect('customer');
     }
 
+    public function invoiceComplete($string)
+    { 
+       $id = base64_decode($string);
+       $orders = Orders::where('id',$id)->get();         
+        $orders->transform(function($order,$key)
+        {
+            $order->cart = unserialize($order->cart);
+            return $order;
+        });
+        $exchange = Exchange::orderBy('id','desc')->first();
+
+        return view('site.order_complete',compact('orders','exchange'));
+    }
 
     
 }

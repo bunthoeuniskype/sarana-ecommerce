@@ -47,10 +47,10 @@
         @foreach($order as $value)
           <tr>
             <td>{{ $i++ }}</td> 
-            <td>{{ $value->customer->first_name.' '.$value->customer->last_name.' '.$value->customer->phone }}</td>          
+            <td><a href="{{url('admin/orders/check/'.$value->id)}}"> {{ $value->customer->first_name.' '.$value->customer->last_name.' '.$value->customer->phone }}</a></td>          
             <td>{{ $value->total_qty }}</td>
             <td>{{ $value->total_amount }}</td>         
-             <td>{{ $value->payment_id }}</td>
+             <td><a href="{{url('admin/orders/check/'.$value->id)}}">{{ $value->payment_id }}</a></td>
              <td>{{ $value->created_at->diffForHumans() }}</td>
             <td>{!! $value->status !!}</td>
           </tr>

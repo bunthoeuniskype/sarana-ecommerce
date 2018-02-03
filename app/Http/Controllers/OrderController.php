@@ -13,6 +13,7 @@ use Redirect;
 use Validator;
 use DB;
 use App;
+use App\Exchange;
 
 class OrderController extends Controller
 {
@@ -126,4 +127,53 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function checkOrder(Request $request,$id)
+    {   
+        $ord = Orders::find($id);
+        $ord->check_status = 1;
+        $ord->save();
+
+         $orders = Orders::where('id',$id)->get();
+
+         $orders->transform(function($order,$key)
+        {
+            $order->cart = unserialize($order->cart);
+            return $order;
+        });
+
+        return view('admin.order.check_order',compact('orders'));
+    }
+
+    public function payment(Request $request,$id){
+
+        $ord = Orders::find($id);
+        $ord->status = "Paid";
+        $ord->payment_id = "Order-".$ord->id;
+        $ord->employee_id = Auth::user()->id;
+        $ord->save();
+
+        $orders = Orders::where('id',$id)->get();         
+        $orders->transform(function($order,$key)
+        {
+            $order->cart = unserialize($order->cart);
+            return $order;
+        });
+        $exchange = Exchange::orderBy('id','desc')->first();
+        return view('admin.order.complete',compact('orders','exchange'));
+    }
+
+    public function complete($id){
+
+        $orders = Orders::where('id',$id)->get();         
+        $orders->transform(function($order,$key)
+        {
+            $order->cart = unserialize($order->cart);
+            return $order;
+        });
+        $exchange = Exchange::orderBy('id','desc')->first();
+        return view('admin.order.complete',compact('orders','exchange'));
+    }
+    
+
 }

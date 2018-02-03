@@ -32,10 +32,13 @@ Route::get('/checkout', array(
 	'as' => 'shopping.checkout'
 	 ));
 
-Route::get('order-items', ['uses'=>'ShoppingController@OrdersItems','as'=>'order.items']);
+Route::get('order-items', ['uses'=>'AddMoneyController@OrdersItems','as'=>'order.items']);
 
 Route::get('/customerlogout', ['as'=>'customer.logout','uses'=>'Auth\LoginCustomerController@logout']);
 Route::get('/customerprofile', 'CustomerController@profile')->name('customer');
+
+Route::get('/view/invoice/{string}', 'CustomerController@invoiceComplete')->name('customer.invoice');
+Route::get('/send/invoice/{id}/{receiveby}', 'AddMoneyController@invoiceSend')->name('send.invoice');
 
 Route::get('/getcart', array(
 	'uses' => 'ShoppingController@getCart',
@@ -108,6 +111,9 @@ Route::get('admin','DashboardController@index');
 Route::get('admin/backup','DashboardController@backup');
 
 Route::get('admin/orders','OrderController@index');
+Route::get('admin/orders/check/{id}','OrderController@checkOrder');
+Route::get('admin/orders/payment/{id}','OrderController@payment');
+Route::get('admin/orders/complete/{id}','OrderController@complete');
 
 Route::resource('admin/category','CategoryController');
 Route::resource('admin/subcategory','SubCategoryController');

@@ -13,12 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
+
 Route::group(['middleware' => 'cors'], function () {
     Route::post('register', 'APIController@register');
     Route::post('login', 'APIController@login');
+    
+
+    Route::post('get_user_all', 'APIController@get_user_all');
     Route::group(['middleware' => 'jwt-auth'], function () {
-    	Route::post('get_user_details', 'APIController@get_user_details');
-    	Route::post('get_user_all', 'APIController@get_user_all');
+    Route::post('get_user_details', 'APIController@get_user_details');	
     });
 });
 
