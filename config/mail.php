@@ -7,7 +7,7 @@ return array(
 'from' => ['address' => 'reply@admin.com', 'name' => 'MIS TEAM'],
 'encryption' => 'tls',
 'username' => 'makejonh4@gmail.com',
-'password' => '14111993ABC',
+'password' => '*******',
 'sendmail' => '/usr/sbin/sendmail -bs',
 'pretend' => false,
 
