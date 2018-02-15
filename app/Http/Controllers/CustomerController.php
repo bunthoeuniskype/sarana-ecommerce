@@ -22,10 +22,20 @@ class CustomerController extends Controller
         //$this->middleware('auth');
     }
     
+     public function uploadPicture(Request $request)
+    {
+      $name =  Customer::uploadImageProfile($request->file('picture'));
+      $customer = Customer::findorfail(Auth::guard('customer')->user()->id);
+      $customer->image = $name;      
+      $customer->save();
+      return response()->json(['status'=>200,'name'=>$name]);
+    }
+
+
   public function profile(Request $request)
     {
 
-        $orders = Orders::where('customer_id', Auth::guard('customer')->user()->id)->orderBy('id','desc')->get();
+        $orders = Orders::where('customer_id', Auth::guard('customer')->user()->id)->orderBy('id','desc')->paginate(2);
         $orders->transform(function($order,$key)
         {
             $order->cart = unserialize($order->cart);
@@ -96,6 +106,38 @@ class CustomerController extends Controller
       return redirect('customerlogin');
     }   
 
+     public function changePassword(Request $request)
+     {
+        $validate = Validator::make($request->all(),[
+           'password' => 'required|max:30|min:6|same:confirm_password',
+          ]);
+
+        if($validate->fails()){
+          return response()->json(['error'=>$validate->messages(),'status'=>500]);
+        }
+
+        $cust = Customer::find(Auth::guard('customer')->user()->id);
+        $cust->password =  bcrypt($request->password);
+        if($cust->save()){
+          return response()->json(['status'=>200]);
+        }
+     }
+
+     public function changeProfile(Request $request)
+     {
+        $validate = Validator::make($request->all(),[
+           'username' => 'required|min:3|unique:customer,username,'.Auth::guard('customer')->user()->id.',id', 
+          ]);
+
+        if($validate->fails()){
+          return response()->json(['error'=>$validate->messages(),'status'=>500]);
+        }
+
+        $cust = Customer::find(Auth::guard('customer')->user()->id);      
+        if($cust->update($request->all())){
+          return response()->json(['status'=>200]);
+        }
+     }
 
     public function index(Request $request){
 
@@ -111,7 +153,7 @@ class CustomerController extends Controller
     public function store(Request $request){           
 
     	//create customer
-    	$customer = new Customer();
+    	  $customer = new Customer();
         $req = $request->all();
         $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=> $customer->encryptedAttribute($request->account_number)));
         $customer->create($data);
@@ -121,7 +163,7 @@ class CustomerController extends Controller
 
     public function edit($id){  
 
-    	$customer = Customer::findorfail($id);
+    	  $customer = Customer::findorfail($id);
         $customer->account_number = $customer->decryptedAttribute($customer->account_number);
     	return view('admin.customer.edit')
     	->with('customer', $customer);

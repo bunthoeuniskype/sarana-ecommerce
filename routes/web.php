@@ -36,6 +36,9 @@ Route::get('order-items', ['uses'=>'AddMoneyController@OrdersItems','as'=>'order
 
 Route::get('/customerlogout', ['as'=>'customer.logout','uses'=>'Auth\LoginCustomerController@logout']);
 Route::get('/customerprofile', 'CustomerController@profile')->name('customer');
+Route::post('/customerprofile/upload/picture','CustomerController@uploadPicture')->name('customer.upload.picture');
+Route::post('/customer/password', 'CustomerController@changePassword')->name('customer.change_password');
+Route::post('/customer/profile', 'CustomerController@changeProfile')->name('customer.change_profile');
 
 Route::get('/view/invoice/{string}', 'CustomerController@invoiceComplete')->name('customer.invoice');
 Route::get('/send/invoice/{id}/{receiveby}', 'AddMoneyController@invoiceSend')->name('send.invoice');

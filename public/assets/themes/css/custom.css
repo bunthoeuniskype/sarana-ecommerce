@@ -77,3 +77,43 @@ bootstrap.min.css:633
 .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
     border: 1px solid #ebebeb;
 }
+a{
+  cursor: pointer;
+  color: blue;
+}
+
+.choose-picture{
+  cursor: pointer;
+}
+.modal label{
+  color: black;
+}
+.icon-zoom-in{
+  margin-top: 5px;
+}
+.icon-shopping-cart{
+   margin-top: 5px; 
+}
+.icon-th-large{
+    margin-top: 5px;
+}
+.icon-list{
+    margin-top: 5px;
+}
+.price{
+    color: #cc0202;
+}
+#footerSection {
+    background: #327d5f;
+    color: white;
+    padding: 28px 0 4px;
+    margin-top: 19px;
+    border-top: 1px solid #444;
+}
+.row-fluid .thumbnails {
+    margin-left: 0;
+    background: white;
+}
+.row-fluid .thumbnails img{
+  max-height: 100px;
+}

@@ -1,5 +1,21 @@
 <?php
+  
 
+  function makeDirectory($directory)
+  {
+     if(!file_exists(base_path().'/public/storage/original/'.$directory)) {
+            mkdir(base_path().'/public/storage/original/'.$directory, 0777, true);
+          } 
+
+        if(!file_exists(base_path().'/public/storage/thumb/'.$directory)) {
+            mkdir(base_path().'/public/storage/thumb/'.$directory, 0777, true);
+          }
+
+          if(!file_exists(base_path().'/public/storage/'.$directory)) {
+            mkdir(base_path().'/public/storage/'.$directory, 0777, true);
+        }
+        return true;
+  }
 
   function checkPermission($permissions){
 

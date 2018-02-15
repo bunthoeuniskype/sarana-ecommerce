@@ -260,5 +260,13 @@
 }
 
 a{
+  cursor: pointer;
   color: blue;
+}
+
+.choose-picture{
+  cursor: pointer;
+}
+.modal label{
+  color: black;
 }

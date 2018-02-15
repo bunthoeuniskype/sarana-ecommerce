@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Image;
 
 class User extends Authenticatable
 {
@@ -28,7 +29,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    
+   
     public function Purchase()
 {
    return $this->hasMany('App\Purchase');

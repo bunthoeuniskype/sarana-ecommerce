@@ -1,5 +1,19 @@
 @extends('site.layout.master')
 
+@section('script')
+<script type="text/javascript">
+	$('#listView').on('click',function(){
+		$('#listView').addClass('btn-primary');	
+		$('#blockView').removeClass('btn-primary');	
+	});
+
+	$('#blockView').on('click',function(){
+		$('#blockView').addClass('btn-primary');	
+		$('#listView').removeClass('btn-primary');		
+	});
+</script>
+@endsection
+
 @section('content')
 
 <?php
@@ -65,7 +79,7 @@ use App\Exchange;
 				<hr class="soft"/>
 				<form class="form-horizontal qtyFrm">
 				  <div class="control-group">
-					<label class="control-label">Price : <h4><span> $ {{$product->price}}</span> <br> ៛ {{ $riel * $product->price }}</h4></label>
+					<h4 class="control-label">Price : </h4><h4 class="price"><span>@if(App::getLocale() == 'en') ${{number_format($product->price,2)}} @else {{ number_format($riel * $product->price,2) }}៛  @endif</span></h4>
 					<div class="controls">
 					<!-- <input type="number" class="span1" value="1" placeholder="Qty."/> -->
 					  <a href="{{ route('shopping.addtocart',['id'=>$product->id]) }}" class="btn btn-xs btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></a>
@@ -107,8 +121,8 @@ use App\Exchange;
               </div>
 		<div class="tab-pane fade" id="profile">
 		<div id="myTab" class="pull-right">
-		 <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
-		 <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
+		 <a href="#listView" data-toggle="tab"><span class="btn btn-small"><i class="icon-list"></i></span></a>
+		 <a href="#blockView" data-toggle="tab"><span class="btn btn-small btn-primary"><i class="icon-th-large"></i></span></a>
 		</div>
 		<br class="clr"/>
 		<hr class="soft"/>
@@ -131,11 +145,10 @@ use App\Exchange;
 					</div>
 					<div class="span3 alignR">
 					<form class="form-horizontal qtyFrm">
-					<h4>$ {{ $value->price }}</h4>
-					<h4>៛ {{ $riel * $value->price }}</h4>
+					<h5 class="price">@if(App::getLocale() == 'en') ${{number_format($product->price,2)}} @else {{ number_format($riel * $product->price,2) }}៛  @endif</h5>
 					<div class="btn-group">
-					  <a href="{{ route('shopping.addtocart',['id'=>$value->id]) }}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-					  <a href="{{url('product/detail/'.$value->slug)}}" class="btn btn-large"><i class="icon-zoom-in"></i></a>
+					  <a href="{{ route('shopping.addtocart',['id'=>$value->id]) }}" class="btn btn-small btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+					  <a href="{{url('product/detail/'.$value->slug)}}" class="btn btn-small"><i class="icon-zoom-in"></i></a>
 					 </div>
 						</form>
 					</div>
@@ -150,8 +163,8 @@ use App\Exchange;
 			          <div class="thumbnail">
 			          <a  href="{{url('product/detail/'.$value->slug)}}"><img src="{{$value->image==''?url('public/uploads/images/none.jpg'):url($value->image)}}" style="max-height: 120px" alt="{{ $value->name }}"></a>
 			          <div class="caption">
-			            <h5>{{ $value->name }}</h5>           
-			             <h4 style="text-align:center"><a class="btn" href="{{url('product/detail/'.$value->slug)}}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="{{ route('shopping.addtocart',['id'=>$value->id]) }}">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$ {{ $value->price }} <br> ៛ {{ $riel * $value->price }}</a></h4>
+			            <h5>{{ $value->name }}</h5>  <h5 class="price">@if(App::getLocale() == 'en') ${{number_format($product->price,2)}} @else {{ number_format($riel * $product->price,2) }}៛  @endif<h5>          
+			             <a class="btn btn-small" href="{{url('product/detail/'.$value->slug)}}"> <i class="icon-zoom-in"></i></a> <a class="btn btn-small btn-primary" href="{{ route('shopping.addtocart',['id'=>$value->id]) }}">Add to <i class="icon-shopping-cart"></i></a>
 			          </div>
 			          </div>
 			         </li>
@@ -160,12 +173,11 @@ use App\Exchange;
 			<hr class="soft"/>
 			</div>
 		</div>
-				<br class="clr">
-					 </div>
+		<br class="clr">
+		 </div>
 		</div>
-          </div>
-
-	</div>
+     </div>
+  </div>
 </div>
 
 @endsection

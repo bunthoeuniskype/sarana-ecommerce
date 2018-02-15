@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Delatbabel\Elocrypt\Elocrypt;
 use DB;
+use Image;
 class Customer extends Model
 {
 	
@@ -38,5 +39,23 @@ public function get_summary()
    return DB::table($this->table)->select(DB::raw('COUNT(*) as total'))->where('status',1)->first();
 }
 
+ static function uploadImageProfile($file){
+
+    $directory =  'public/storage/users';
+    $directoryOrigin =  'public/storage/original/users';    
+    makeDirectory('users');    
+
+    if($file){
+       $destinationPath = base_path().'/'.$directory;
+       $destinationPathOrigin = base_path().'/'.$directoryOrigin;
+       $name = time().'-'.$file->getClientOriginalName();
+
+      $img = Image::make($file->getRealPath());
+      $img->fit(200)->save($destinationPath.'/'.$name);
+      $file->move($destinationPathOrigin,  $name);
+    }   
+    $pathName = $directory.'/'.$name;
+    return $pathName; 
+    }
 
 }

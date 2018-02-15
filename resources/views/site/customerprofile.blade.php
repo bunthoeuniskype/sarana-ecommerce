@@ -1,5 +1,22 @@
 @extends('site.layout.master')
 
+@section('script')
+<script src="{{asset('public/assets/js/jquery.form.js')}}"></script>
+@include('site.inc.upload_profile_picture')
+<script type="text/javascript">
+  $('.change_password').on('click',function() {
+     $('#model-change-password').modal('show');
+  });
+  
+  $('.change_profile').on('click',function() {
+     $('#model-change-profile').modal('show');
+  })
+
+</script>
+@include('site.inc.change_password')
+@include('site.inc.change_profile')
+@endsection
+
 @section('content')
 <style type="text/css">
   .img-rounded {
@@ -72,17 +89,32 @@
                           </td>
                          <tr>
                        </table>   
+
+                    <div class="pull-right">
+                      {!! $orders->links() !!} 
                     </div>
+                   </div> 
                      <div class="col-md-3">
                         <table class="table table-responsive">
                           <tr>
                             <td> 
-                            <button class="btn btn-small btn-primary" style="float:right"><i class="fa fa-edit"></i> Edit Profile</button>
+                            <button id="change_profile" class="btn btn-small btn-primary change_profile" style="float:right"><i class="fa fa-edit"></i> Edit Profile</button>
                             <h4>Profile</h4> </td>
                           </tr>
                           <tr>
                             <td style="text-align: center;">
-                            <img src="{{ Auth::guard('customer')->user()->image ? Auth::guard('customer')->user()->image : Auth::guard('customer')->user()->image_socail ? Auth::guard('customer')->user()->image_socail : 'public/uploads/images/user.jpg' }}" class="img-rounded img-thumnail"> </td>
+                              <form class="upload-picture" action="{{route('customer.upload.picture')}}" method="post" enctype="multipart/form-data">
+                              <div class="col-md-12">
+                                 <img src="{{ Auth::guard('customer')->user()->image ? Auth::guard('customer')->user()->image : 'public/uploads/images/user.jpg' }}" class="img-rounded img-thumnail img-circle user-profile-info choose-picture display-picture">
+                                <input class="input-picture hidden" name="picture" type="file" myAttr="profile"/>
+                                {{csrf_field()}}
+                              </div>
+                             
+                              <div class="col-md-12">
+                                <a class="choose-picture upload-text"><i class="fa fa-picture-o"></i> Upload Picture</a>
+                              </div>
+                             </form>
+                            </td>
                           </tr>
                            <tr>
                             <td>
@@ -121,7 +153,7 @@
                           </tr>
                           <tr>
                             <td>                             
-                              Password : <a href="#">Change Password</a> 
+                              Password : <a href="#" class="change_password">Change Password</a> 
                             </td>
                           </tr>
                         </table>           
@@ -129,5 +161,7 @@
                   </div>
                </div>
             </div>
+
+
 
 @endsection

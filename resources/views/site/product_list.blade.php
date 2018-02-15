@@ -20,8 +20,8 @@
 
 		<div class="tab-pane" id="profile">
 		<div id="myTab" class="pull-right">
-		 <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
-		 <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
+		 <a href="#listView" data-toggle="tab"><span class="btn btn-small"><i class="icon-list"></i></span></a>
+		 <a href="#blockView" data-toggle="tab"><span class="btn btn-small btn-primary"><i class="icon-th-large"></i></span></a>
 		</div>
 		<br class="clr"/>
 		<hr class="soft"/>
@@ -44,11 +44,10 @@
 					</div>
 					<div class="span3 alignR">
 					<form class="form-horizontal qtyFrm">
-					<h4> $ {{ $value->price }} </h4>
-					 <h4> ៛​​ {{ $riel * $value->price}} <h4>
+				    <h5 class="price">@if(App::getLocale() == 'en') ${{number_format($value->price,2)}} @else {{ number_format($riel * $value->price,2) }}៛  @endif<h5>   
 					<div class="btn-group">
-					  <a href="{{ route('shopping.addtocart',['id'=>$value->id]) }}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-					  <a href="{{url('product/detail/'.$value->slug)}}" class="btn btn-large"><i class="icon-zoom-in"></i></a>
+					  <a href="{{ route('shopping.addtocart',['id'=>$value->id]) }}" class="btn btn-small btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+					  <a href="{{url('product/detail/'.$value->slug)}}" class="btn btn-small"><i class="icon-zoom-in"></i></a>
 					 </div>
 						</form>
 					</div>
@@ -63,8 +62,8 @@
 			          <div class="thumbnail">
 			          <a  href="{{url('product/detail/'.$value->slug)}}"><img src="{{$value->image==''?url('public/uploads/images/none.jpg'):url($value->image)}}" style="max-height: 120px" alt="{{ $value->name }}"></a>
 			          <div class="caption">
-			            <h5>{{ $value->name }}</h5>           
-			             <h4 style="text-align:center"><a class="btn" href="{{url('product/detail/'.$value->slug)}}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="{{ route('shopping.addtocart',['id'=>$value->id]) }}">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$ {{ $value->price }} <br> ៛​​ {{ $riel * $value->price}} </a></h4>
+			            <h5>{{ $value->name }}</h5>  <h5 class="price">@if(App::getLocale() == 'en') ${{number_format($value->price,2)}} @else {{ number_format($riel * $value->price,2) }}៛  @endif<h5>         
+			             <h4 style="text-align:center"><a class="btn btn-small" href="{{url('product/detail/'.$value->slug)}}"> <i class="icon-zoom-in"></i></a> <a class="btn btn-small btn-primary" href="{{ route('shopping.addtocart',['id'=>$value->id]) }}">Add to <i class="icon-shopping-cart"></i></a></h4>
 			          </div>
 			          </div>
 			         </li>

@@ -318,4 +318,5 @@ class UserController extends Controller
         return property_exists($this, 'guard') ? $this->guard : null;
     }
 
+   
 }

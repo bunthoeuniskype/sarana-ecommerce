@@ -10,19 +10,19 @@
                          </div>
                             <div class="panel panel-body">
 
-<!--show error -->
-@include('errors/errors')
+            <!--show error -->
+            @include('errors/errors')
+            
+             @if(Session::has('save'))
+                                    <div class="alert alert-success">
+                                    <em>{!! Session('save') !!}</em>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">&times</span>
+                                    </button>
+                                    </div>
+              @endif
 
- @if(Session::has('save'))
-                        <div class="alert alert-success">
-                        <em>{!! Session('save') !!}</em>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                            <span aria-hidden="true">&times</span>
-                        </button>
-                        </div>
-  @endif
-
- {!! Form::open(array('url'=>'admin/employee','files'=>true)) !!}
+ 		{!! Form::open(array('url'=>'admin/employee','files'=>true)) !!}
                         {{ csrf_field() }}
 
                       <div class="row" style="margin: 0px">
