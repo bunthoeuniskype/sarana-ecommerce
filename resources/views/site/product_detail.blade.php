@@ -11,7 +11,17 @@
 		$('#blockView').addClass('btn-primary');	
 		$('#listView').removeClass('btn-primary');		
 	});
+
+	var id = '{{$product->id}}';
+	var productId = sessionStorage.getItem("productId"+id);	
+	if(productId !== id){
+		$.get('{{route("product.countview",'')}}/'+id);
+		checkSec = sessionStorage.setItem("productId"+id,id);
+	}
+	
 </script>
+
+
 @endsection
 
 @section('content')
@@ -60,22 +70,23 @@ use App\Exchange;
 			  <a class="left carousel-control" href="{{url('public/assets')}}/#myCarousel" data-slide="prev">‹</a>
               <a class="right carousel-control" href="{{url('public/assets')}}/#myCarousel" data-slide="next">›</a> 
 			  -->
-              </div>
-			  
-			<!--  <div class="btn-toolbar">
-			  <div class="btn-group">
-				<span class="btn"><i class="icon-envelope"></i></span>
-				<span class="btn" ><i class="icon-print"></i></span>
-				<span class="btn" ><i class="icon-zoom-in"></i></span>
-				<span class="btn" ><i class="icon-star"></i></span>
-				<span class="btn" ><i class=" icon-thumbs-up"></i></span>
-				<span class="btn" ><i class="icon-thumbs-down"></i></span>
-			  </div>
-			</div> -->
+              </div>		  
+			 
 			</div>
+
 			<div class="span6">
 				<span><h3>{{$product->name}}</h3> <span>Created Date : {{MakeDateClass::time_elapsed_string($product->created_at)}} {{$product->created_at}}</span></span>
 				<!-- <small>- (14MP, 18x Optical Zoom) 3-inch LCD</small> -->
+				<hr class="soft clr"/>
+				<?php $urlShare = Request::fullUrl(); ?>
+					<div style="display: flex;">
+					<b>Share This : </b>
+					<span style="margin-left: 10px;"><a href="http://www.facebook.com/sharer.php?u={{ $urlShare }}&title={{$product->name}}" target="_blank"><img style="border-radius: 50%; height: 25px;" src="{{asset('public/uploads/images/social/fb.jpg')}}"></span>
+					<span style="margin-left: 10px;"><a href="https://plus.google.com/share?url={{ $urlShare }}&title={{$product->name}}" target="_blank"><img style="border-radius: 50%; height: 25px;" src="{{asset('public/uploads/images/social/go.jpg')}}"></a></span>
+					<span style="margin-left: 10px;"><a href="https://twitter.com/share?text={{$product->name }}&url={{ $urlShare }}&amp;hashtags=AllInMis" target="_blank"><img  style="border-radius: 50%; height: 25px;" src="{{asset('public/uploads/images/social/tw.jpg')}}"></a></span>
+					
+					 &nbsp;  <span style="display:flex;"> &nbsp;  <b>Views :  </b> &nbsp; <i class="fa fa-eye"></i> &nbsp; {{$product->count_view+1}} <b> &nbsp;  Rating :  &nbsp; </b> @include('site.inc.rating_product') </span>
+					</div>
 				<hr class="soft"/>
 				<form class="form-horizontal qtyFrm">
 				  <div class="control-group">
@@ -85,8 +96,7 @@ use App\Exchange;
 					  <a href="{{ route('shopping.addtocart',['id'=>$product->id]) }}" class="btn btn-xs btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></a>
 					</div>
 				  </div>
-				</form>
-				
+				</form>					 
 				<hr class="soft"/>
 				<h4>{{$product->qty}} items in stock</h4>
 				<form class="form-horizontal qtyFrm pull-right">
@@ -109,15 +119,14 @@ use App\Exchange;
 			</div>
 			
 			<div class="span9">
-            <ul id="productDetail" class="nav nav-tabs">
+            <ul id="productDetail" class="nav nav-tabs">             
               <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
               <li><a href="#profile" data-toggle="tab">Related Products</a></li>
+               <li><a href="#commnets" data-toggle="tab">Comments</a></li>
             </ul>
-            <div id="myTabContent" class="tab-content">
-              <div class="tab-pane fade active in" id="home">
-			 	
+            <div id="myTabContent" class="tab-content">              
+              <div class="tab-pane fade active in" id="home">			 	
 			 	{!!$product->description!!}
-
               </div>
 		<div class="tab-pane fade" id="profile">
 		<div id="myTab" class="pull-right">
@@ -175,9 +184,13 @@ use App\Exchange;
 		</div>
 		<br class="clr">
 		 </div>
+		 <div class="tab-pane fade" id="commnets">
+         @include('site.inc.commentfb')
+         </div>
 		</div>
      </div>
   </div>
 </div>
+
 
 @endsection

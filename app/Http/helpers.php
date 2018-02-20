@@ -1,5 +1,11 @@
 <?php
   
+  function settingHelper($key)
+  {
+   $data = \App\Setting::where('key',$key)->first();
+   if($data) return $data->value;
+   return '';
+  }
 
   function makeDirectory($directory)
   {

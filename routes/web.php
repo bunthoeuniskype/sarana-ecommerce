@@ -51,6 +51,8 @@ Route::get('/getcart', array(
 
 Route::group(['middleware' => ['web']], function () {	
 
+Route::get('product-add-count-view/{id}',['uses'=>'HomeController@countView','as'=>'product.countview']);
+Route::post('product-rate',['uses'=>'HomeController@ratingProduct','as'=>'product.rating']);
 Route::get('/contact', 'HomeController@contact');
 Route::post('/feedback', ['uses'=>'HomeController@feedback','as'=>'feedback']);
 

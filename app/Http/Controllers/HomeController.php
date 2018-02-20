@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Contact;
 use Redirect;
 use App\User;
+use App\Product;
 
 class HomeController extends Controller
 {
@@ -19,6 +20,23 @@ class HomeController extends Controller
     {
         //$this->middleware('auth');
     }
+
+    public function countView($id)
+    {
+       $pro = Product::find($id);
+       $pro->count_view = $pro->count_view + 1;
+       $pro->save();
+       return 1;
+    }
+
+    public function ratingProduct(Request $request)
+    {
+       $pro = Product::find($request->id);
+       $pro->rate = $request->rate;
+       $pro->save();
+       return 1;
+    }
+
 
     /**
      * Show the application dashboard.
