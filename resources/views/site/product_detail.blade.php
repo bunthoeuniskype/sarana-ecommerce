@@ -62,21 +62,17 @@ use App\Exchange;
                     <a href="{{url($g->image)}}"> <img style="width:29%" src="{{url($g->image)}}" alt=""/></a>
                     @endif
                   @endforeach
-                  </div>
-                 
+                  </div>                
                   
                 </div>
-              <!--  
-			  <a class="left carousel-control" href="{{url('public/assets')}}/#myCarousel" data-slide="prev">‹</a>
-              <a class="right carousel-control" href="{{url('public/assets')}}/#myCarousel" data-slide="next">›</a> 
-			  -->
-              </div>		  
-			 
+             
+              </div>	  
+			
 			</div>
 
 			<div class="span6">
 				<span><h3>{{$product->name}}</h3> <span>Created Date : {{MakeDateClass::time_elapsed_string($product->created_at)}} {{$product->created_at}}</span></span>
-				<!-- <small>- (14MP, 18x Optical Zoom) 3-inch LCD</small> -->
+				
 				<hr class="soft clr"/>
 				<?php $urlShare = Request::fullUrl(); ?>
 					<div style="display: flex;">
@@ -96,26 +92,28 @@ use App\Exchange;
 					  <a href="{{ route('shopping.addtocart',['id'=>$product->id]) }}" class="btn btn-xs btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></a>
 					</div>
 				  </div>
-				</form>					 
-				<hr class="soft"/>
-				<h4>{{$product->qty}} items in stock</h4>
-				<form class="form-horizontal qtyFrm pull-right">
-				  <div class="control-group">
-					<label class="control-label"><span>Color</span></label>
-					<div class="controls">
-					  <select class="span2">
-						  <option>{{$product->color}}</option>						 
-						</select>
-					</div>
-				  </div>
-				</form>
+					</form>					 
+					<hr class="soft"/>
+					<h5>{{$product->qty}} items in stock <span>(avariable)</span></h5>					
+					  <div class="control-group">
+						<label class="control-label"><span>Color : </span></label>
+						<div class="controls">
+						  <select class="span2">
+							  <option>{{$product->color}}</option>						 
+							</select>
+						</div>
+						@if($product->file != '')
+						<a href="{{asset('public/'.$product->file)}}" target="_blank" class="pull-right">View File</a>
+				        @endif	
+					  </div>
+					
+				
 				<hr class="soft clr"/>
 				<p>
-				{{$product->detail}}
-				
+				{{$product->detail}}				
 				</p>
-				<!-- <a class="btn btn-small pull-right" href="{{url('public/assets')}}/#detail">More Details</a> -->		
 			<hr class="soft"/>
+
 			</div>
 			
 			<div class="span9">

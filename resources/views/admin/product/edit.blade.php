@@ -230,7 +230,7 @@
                          {!! Form::label('description',trans('common.description')) !!}
                         </div>
                        <div class="input-group from-group col-xs-12">                       
-                          <textarea name="description" class="form-control"></textarea>
+                          <textarea name="description" class="form-control">{!!$product->description!!}</textarea>
                         </div>
                         </div>
                         </div>  
