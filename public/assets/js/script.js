@@ -20,4 +20,3 @@ $('.list-group-item').hover(function()
                        $(this).removeClass("active");
                     } );               
 
-     
