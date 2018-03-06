@@ -160,7 +160,8 @@ $("#scan_barcode" ).focus();
 $(document).on('keydown','.changesNo',function(event) {   
    
     var keycode = (event.keyCode ? event.keyCode : event.which);
-    if(keycode == '13' || keycode == '9') { 
+    //if(keycode == '13' || keycode == '9') { 
+   if(keycode == '13' || keycode == '9') {     
     event.preventDefault();   
      $('#load_initail :input').attr('disabled', true);
     $('#ajaxBusy').show();
@@ -212,18 +213,21 @@ $(document).on('keydown','#scan_barcode',function(e){
         barcode = $('#scan_barcode').val();   
         if(barcode != ''){
         var code = (e.keyCode ? e.keyCode : e.which);
-        if(code==13 || code==9)// Enter key hit
+       // if(code==13 || code==9)// Enter key hit
+       if(code==13)
         {   
-          e.stopPropagation();           
-         $('#load_initail :input').attr('disabled', true);     
+        
+        e.stopPropagation();           
+        $('#load_initail :input').attr('disabled', true);     
         $('#ajaxBusy').show();
-    
+        $('.changesNo').prop('disabled',true);
         $.ajax({
         type : 'GET',
         url : '{{url('admin/sale/addcart')}}/'+barcode,
         dataType:'json',
         success:function(data){          
-           $('#ajaxBusy').hide();            
+           $('#ajaxBusy').hide();  
+             $('.changesNo').prop('disabled',false);          
              if(data.status==true){
            $('#load_initail').load('{{route('load_initial.sale')}}');
            }else if(data.status==false){

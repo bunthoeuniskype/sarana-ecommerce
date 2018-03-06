@@ -31,7 +31,14 @@ class PurchaseController extends Controller
    public function AddToCart(Request $request,$id)
    {
 
-    $products = Product::where('id',$id)->first();
+    /*$products = Product::where('id',$id)->first();*/
+    
+    $where = ['id'=>$id];
+    $products = Product::where($where)->first();  
+    if(!$products){
+      $where = ['barcode'=>$id,['barcode','!=','']];      
+      $products = Product::where($where)->first();      
+    }
 
     if($products){
           

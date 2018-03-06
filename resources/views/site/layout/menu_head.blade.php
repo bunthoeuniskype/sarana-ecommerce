@@ -20,7 +20,7 @@
       <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
     </form>
     <ul id="topMenu" class="nav pull-right">  
-   <li class=""><a href="{{url('')}}">Delivery</a></li>
+   <li class=""><a href="{{url('delivery')}}">Delivery</a></li>
    <li class=""><a href="{{url('contact')}}">Contact Us</a></li>
     </ul>
   </div>

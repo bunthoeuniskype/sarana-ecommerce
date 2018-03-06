@@ -21,6 +21,12 @@ use Auth;
 class ShoppingController extends Controller
 {
 
+
+    public function delivery()
+    {
+        return view('site.delivery');
+    }
+
   public function index()
    {
       $paginate = false;

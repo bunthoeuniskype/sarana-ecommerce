@@ -31,12 +31,22 @@ class SaleController extends Controller
    {
 
     if(Session::has('mode_sale') == 'Sale'){
-      $where = ['id'=>$id,['qty','>', 0]];
+      $where = ['id'=>$id,['qty','>', 0]];      
     }else{
       $where = ['id'=>$id];
     }
-    $products = Product::where($where)->first();
-  
+
+    $products = Product::where($where)->first();  
+    
+    if(!$products){
+       if(Session::has('mode_sale') == 'Sale'){
+          $where = ['barcode'=>$id,['qty','>', 0],['barcode','!=','']];      
+        }else{
+          $where = ['barcode'=>$id,['barcode','!=','']];
+        }
+      $products = Product::where($where)->first();      
+    }
+   
     if($products){
 
     $oldCart = Session::has('cart_sale') ? Session::get('cart_sale') : null;

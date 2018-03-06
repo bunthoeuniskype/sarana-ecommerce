@@ -72,7 +72,7 @@ Route::get('admin/product/select_product_color',['uses'=>'ProductController@sele
 Route::get('admin/product/select_product_barcode',['uses'=>'ProductController@select_product_barcode','as'=>'select_product_barcode']);
 
 Route::get('/favorite', 'ShoppingController@favoriteProduct');
-
+Route::get('/delivery','ShoppingController@delivery');
 //site
 Route::get('/', 'ShoppingController@index');
 Route::get('category/{slug}', 'ShoppingController@byCategory');

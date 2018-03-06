@@ -220,17 +220,19 @@ $(document).on('keydown','#scan_barcode',function(e){
         barcode = $('#scan_barcode').val();
         if(barcode != ''){
      var code = (e.keyCode ? e.keyCode : e.which);
-        if(code==13 || code==9)// Enter key hit
+       // if(code==13 || code==9)// Enter key hit
+      if(code==13)
         {    
         e.stopPropagation();   
         $('#ajaxBusy').show();
-    
+        $('.changesNo').prop('disabled',true);    
         $.ajax({
         type : 'GET',
         url : '{{url('admin/purchase/addcart')}}/'+barcode,
         dataType:'json',
         success:function(data){
            $('#ajaxBusy').hide();
+            $('.changesNo').prop('disabled',false);
              if(data.status==true){
            $('#load_initail').load('{{route('load_initial.purchase')}}');
            }else if(data.status==false){

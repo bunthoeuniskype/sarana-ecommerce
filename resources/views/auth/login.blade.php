@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">System Security Login</div>
 
-                <div class="panel-body" style="background-color: aliceblue;">
+                <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('user.login') }}">
                         {{ csrf_field() }}
 

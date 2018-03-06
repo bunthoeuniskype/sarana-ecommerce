@@ -46,6 +46,18 @@ class AdsController extends Controller
     public function store(Request $request)
     {
 
+       /* $val =  Validator::make($request->all(),[
+            'video_id' => 'required|min:3|regex:/^(?=.*[a-zA-Z])(?=.*\d).+$/',
+            'image' =>  'required',
+            ]);
+         
+            $err = array();
+            foreach ($val->errors()->getMessages() as $key => $value) {
+              $err[] = array($key => $value[0]);
+            }
+       
+        return json_encode($err);*/
+
         $youtube = new Youtube();       
 
         $ads = new Ads($request->all());

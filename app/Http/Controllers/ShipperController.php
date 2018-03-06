@@ -18,6 +18,7 @@ class ShipperController extends Controller
         $this->middleware('auth');
     }
 
+
     public function index(Request $request){
 
         $shipper = Shipper::where('status',1)->orderBy('id','DESC')->get();
