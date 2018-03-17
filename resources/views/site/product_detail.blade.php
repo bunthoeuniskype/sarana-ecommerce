@@ -95,13 +95,14 @@ use App\Exchange;
 					</form>					 
 					<hr class="soft"/>
 					<h5>{{$product->qty}} items in stock <span>(avariable)</span></h5>					
-					  <div class="control-group">
-						<label class="control-label"><span>Color : </span></label>
+					  <div class="control-group">						
 						<div class="controls">
+						 <label class="control-label">Color :</span> 
 						  <select class="span2">
 							  <option>{{$product->color}}</option>						 
 							</select>
 						</div>
+						
 						@if($product->file != '')
 						<a href="{{asset('public/'.$product->file)}}" target="_blank" class="pull-right">View File</a>
 				        @endif	

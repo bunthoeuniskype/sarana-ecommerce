@@ -37,7 +37,7 @@
 <div id="header">
 <div class="container">
 <div id="welcomeLine" class="row">
-  <div class="span6">
+  <div class="span4">
  <!-- Authentication Links -->
               <a class="btn btn-mini btn-primary" href="{{url('admin')}}">Login Administrator</a> |
              @if (!Auth::guard('customer')->check())
@@ -50,7 +50,7 @@
              @endif
    </div>  
   
-  <div class="span6">
+  <div class="span8">
   <div class="pull-right">
   <?php
     use App\Exchange; 
@@ -112,7 +112,12 @@
   <script src="{{url('')}}/public/assets/themes/js/google-code-prettify/prettify.js"></script>  
   <script src="{{url('')}}/public/assets/themes/js/bootshop.js"></script>
   <script src="{{url('')}}/public/assets/themes/js/jquery.lightbox-0.5.js"></script>
-  
+  <script type="text/javascript">
+  $('#srchFld').on('focus',function () {
+    $(this).css('background-image','none');
+  })
+  </script>
+
   @yield('script')
  
 </body>

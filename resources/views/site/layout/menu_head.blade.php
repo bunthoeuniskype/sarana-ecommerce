@@ -17,7 +17,7 @@
          <option value="{{$value->group_id}}">{{$value->name}}</option>
         @endforeach   
     </select> 
-      <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+      <button type="submit" id="submitButton" class="btn btn-primary">Search..</button>
     </form>
     <ul id="topMenu" class="nav pull-right">  
    <li class=""><a href="{{url('delivery')}}">Delivery</a></li>
@@ -25,7 +25,6 @@
     </ul>
   </div>
 </div>
-
 
 
 

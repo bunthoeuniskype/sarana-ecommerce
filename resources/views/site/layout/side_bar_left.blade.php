@@ -28,9 +28,9 @@
       </div>
       <br/> 
    @endforeach       
-      <div class="thumbnail">
+     <!--  <div class="thumbnail">
         <img src="{{url('')}}/public/assets/themes/images/payment_methods.png" title="Bootshop Payment Methods" alt="Payments Methods">
         <div class="caption">
           <h5>Payment Methods</h5>
     </div>
-</div>
+</div> -->

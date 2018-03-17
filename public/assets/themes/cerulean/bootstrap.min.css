@@ -309,7 +309,7 @@ table td[class*="span"],table th[class*="span"],.row-fluid table td[class*="span
 .table-hover tbody tr.info:hover td{background-color:#91d7ee;}
 [class^="icon-"],[class*=" icon-"]{display:inline-block;width:14px;height:14px;*margin-right:.3em;line-height:14px;vertical-align:text-top;background-image:url("../img/glyphicons-halflings.png");background-position:14px 14px;background-repeat:no-repeat;margin-top:1px;}
 .icon-white,.nav-pills>.active>a>[class^="icon-"],.nav-pills>.active>a>[class*=" icon-"],.nav-list>.active>a>[class^="icon-"],.nav-list>.active>a>[class*=" icon-"],.navbar-inverse .nav>.active>a>[class^="icon-"],.navbar-inverse .nav>.active>a>[class*=" icon-"],.dropdown-menu>li>a:hover>[class^="icon-"],.dropdown-menu>li>a:hover>[class*=" icon-"],.dropdown-menu>.active>a>[class^="icon-"],.dropdown-menu>.active>a>[class*=" icon-"],.dropdown-submenu:hover>a>[class^="icon-"],.dropdown-submenu:hover>a>[class*=" icon-"]{background-image:url("../img/glyphicons-halflings-white.png");}
-.icon-glass{background-position:0 0;}
+/*.icon-glass{background-position:0 0;}
 .icon-music{background-position:-24px 0;}
 .icon-search{background-position:-48px 0;}
 .icon-envelope{background-position:-72px 0;}
@@ -448,7 +448,7 @@ table td[class*="span"],table th[class*="span"],.row-fluid table td[class*="span
 .icon-tasks{background-position:-384px -144px;}
 .icon-filter{background-position:-408px -144px;}
 .icon-briefcase{background-position:-432px -144px;}
-.icon-fullscreen{background-position:-456px -144px;}
+.icon-fullscreen{background-position:-456px -144px;}*/
 .dropup,.dropdown{position:relative;}
 .dropdown-toggle{*margin-bottom:-3px;}
 .dropdown-toggle:active,.open .dropdown-toggle{outline:0;}
@@ -1501,4 +1501,15 @@ i[class^="icon-"]{opacity:0.8;}
   .col-lg-offset-0 {
     margin-left: 0;
   }
+}
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    margin-top: 5px;
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+}
+.tab-content {    
+    overflow: hidden;
 }

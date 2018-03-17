@@ -48,7 +48,7 @@
         @foreach($advertisement as $value)
           <tr>
             <td>{{ $i++ }}</td>           
-              <td><img src="{{ $value->ads_type=='Banner'?asset($value->image) : asset('http://img.youtube.com/vi/'.$value->video_id.'/mqdefault.jpg')}}" height="50px"> </td>
+              <td><img src="{{ $value->ads_type=='Banner' || $value->ads_type=='Slide' ? asset($value->image) : asset('http://img.youtube.com/vi/'.$value->video_id.'/mqdefault.jpg')}}" height="50px"> </td>
                <td><a href="{{ url('admin/advertisement/'.$value->id.'/edit') }}">
                  {{ substr($value->title,0,35) }} ...
                </a></td>
