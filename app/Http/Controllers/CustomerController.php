@@ -90,8 +90,13 @@ class CustomerController extends Controller
     }
     public function verify(Request $request,$token)
     {
-        $cust = Customer::where('verify',$token);
-        $cust->update(['status'=>1,'verify'=>null]);
+        try {
+          $cust = Customer::where('verify',$token);
+          $cust->update(['status'=>1,'verify'=>null]);
+        } catch (Exception $e) {
+          
+        }        
+        Session::flash('save','Email verify is success!');
         return redirect('customerlogin');
     }
 
@@ -116,7 +121,7 @@ class CustomerController extends Controller
          $receiveby = $cust->email;
          $subject = 'Verify Register';
          $messages = 'Your register is Success, Please Verify Email Address before login!';
-         $url      = url('verify/email/'.$cust->verify);
+         $url      = route('verify.email',$cust->verify);
          try {
             Mail::send('site.order_send_mail',compact('url','messages'), function ($message) use ($receiveby,$subject) {  
             $message->to($receiveby)->subject($subject);
