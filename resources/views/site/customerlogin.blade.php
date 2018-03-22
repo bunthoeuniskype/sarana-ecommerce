@@ -2,7 +2,7 @@
 
 @section('content')
 
-        <div class="col-md-6 col-md-offset-3" style="border:1px solid; padding:5px; padding-left:15px; padding-bottom:25px">            
+        <div class="col-md-6 col-md-offset-3" style="padding:5px; padding-left:15px; padding-bottom:25px">            
         
             <div class="panel panel-default" >
                 <div class="panel-heading"><h3>Login</h3></div>
@@ -22,17 +22,17 @@
                         {{ csrf_field() }}
 
                         <div class="form-group">
-                            <label for="email" class="col-md-4 control-label">UserName</label>
+                            <label for="email" class="control-label">UserName</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}">
 
                             </div>
                         </div>
 
                         <div class="form-group" >
-                            <label for="password" class="col-md-4 control-label" style="margin-top:3px;">Password</label>
-                            <div class="col-md-6" style="margin-top:3px;">
+                            <label for="password" class="control-label" style="margin-top:3px;">Password</label>
+                            <div class="col-md-12" style="margin-top:3px;">
                                 <input id="password" type="password" class="form-control" name="password">
 
                             </div>
@@ -40,7 +40,7 @@
 
                        
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div class="col-md-12">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="remember"> Remember Me
@@ -58,7 +58,6 @@
                                 <a href="{{url('customersignup')}}" class="btn btn-success">
                                     <i class="fa fa-btn fa-sign-up"></i> Register
                                 </a>
-
                                  <a href="{{url('/redirect')}}" class="btn btn-primary">Login with Facebook</a>
                                
                             </div>

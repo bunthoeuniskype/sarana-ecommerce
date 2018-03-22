@@ -9,12 +9,12 @@ use DB;
 class Employee extends Model
 {
 	
-    use Elocrypt;
+   // use Elocrypt;
 
     protected $table = "employee";
     protected $fillable = [ 'firstname', 'lastname', 'email', 'phone', 'gender', 'address', 'description', 'image', 'created_at', 'updated_at', 'status', 'verify', 'dob', 'account_number' ];
 
-    protected $encrypts = [];
+    // protected $encrypts = [];
     
     public function user()
 	{

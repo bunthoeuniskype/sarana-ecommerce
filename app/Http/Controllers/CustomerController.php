@@ -14,6 +14,7 @@ use App\Orders;
 use Auth;
 use App\Exchange;
 use Mail;
+use Str;
 
 class CustomerController extends Controller
 {
@@ -62,8 +63,10 @@ class CustomerController extends Controller
         $password = $request->password;
 
         $customers = Customer::where('username','=', $username)
-                                    ->where('password','=',$password)
-                                    ->first();
+                                ->orWhere('email',$username)
+                                ->where('password','=',$password)
+                                ->where('status',1)
+                                ->first();
 
         
        Session::put('customer',$customers);
@@ -85,6 +88,12 @@ class CustomerController extends Controller
     {
        return view('site.customersignup');
     }
+    public function verify(Request $request,$token)
+    {
+        $cust = Customer::where('verify',$token);
+        $cust->update(['status'=>1,'verify'=>null]);
+        return redirect('customerlogin');
+    }
 
     public function postSignup(Request $request)
     {
@@ -101,7 +110,20 @@ class CustomerController extends Controller
           $cust->password =  bcrypt($request->password);
           $cust->email = $request->email;
           $cust->phone = $request->phone;     
+          $cust->verify = str_random(60);  
           $cust->save();
+                    
+         $receiveby = $cust->email;
+         $subject = 'Verify Register';
+         $messages = 'Your register is Success, Please Verify Email Address before login!';
+         $url      = url('verify/email/'.$cust->verify);
+         try {
+            Mail::send('site.order_send_mail',compact('url','messages'), function ($message) use ($receiveby,$subject) {  
+            $message->to($receiveby)->subject($subject);
+         });
+        } catch (Exception $e) {
+            
+        }
       Session::flash('save','Save is Successfully !');
       return redirect('customerlogin');
     }   
@@ -147,26 +169,27 @@ class CustomerController extends Controller
 
    
     public function create(){
-    	return view('admin.customer.create');
+      return view('admin.customer.create');
     }
 
     public function store(Request $request){           
 
-    	//create customer
-    	  $customer = new Customer();
+      //create customer
+        $customer = new Customer();
         $req = $request->all();
-        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=> $customer->encryptedAttribute($request->account_number)));
+        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
+     //   $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=> $customer->encryptedAttribute($request->account_number)));
         $customer->create($data);
-    	Session::flash('save','Save is Successfully !');
-    	return redirect('admin/customer/create');
+      Session::flash('save','Save is Successfully !');
+      return redirect('admin/customer/create');
     }
 
     public function edit($id){  
 
-    	  $customer = Customer::findorfail($id);
-        $customer->account_number = $customer->decryptedAttribute($customer->account_number);
-    	return view('admin.customer.edit')
-    	->with('customer', $customer);
+        $customer = Customer::findorfail($id);
+        //$customer->account_number = $customer->decryptedAttribute($customer->account_number);
+      return view('admin.customer.edit')
+      ->with('customer', $customer);
 
     }
 
@@ -174,11 +197,11 @@ class CustomerController extends Controller
 
         $customer = Customer::findorfail($id);
         $req = $request->all();
-        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),
-            'account_number'=>$customer->encryptedAttribute($request->account_number)));
-        $customer->update($data);    	
-    	Session::flash('save','Save is Successfully!');
-    	return redirect('admin/customer');
+        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
+      //  $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),  'account_number'=>$customer->encryptedAttribute($request->account_number)));
+        $customer->update($data);     
+      Session::flash('save','Save is Successfully!');
+      return redirect('admin/customer');
     }
 
        public function delete($id){        
@@ -189,10 +212,10 @@ class CustomerController extends Controller
         return redirect('admin/customer');
     }
 
-    public function destroy($id){    	
-    	$customer= Customer::find($id);
+    public function destroy($id){     
+      $customer= Customer::find($id);
         $customer->delete();
-    	return redirect('customer');
+      return redirect('customer');
     }
 
     public function invoiceComplete($string)
@@ -208,6 +231,5 @@ class CustomerController extends Controller
 
         return view('site.order_complete',compact('orders','exchange'));
     }
-
     
 }

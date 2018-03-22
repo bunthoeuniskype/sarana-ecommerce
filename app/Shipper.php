@@ -8,12 +8,12 @@ use DB;
 class Shipper extends Model
 {
 	
-    use Elocrypt;
+    //use Elocrypt;
 
     protected $table='shipper';
     protected $fillable = [ 'company_name','firstname', 'lastname', 'email', 'phone', 'gender', 'address', 'description', 'image', 'created_at', 'updated_at', 'status', 'verify', 'dob', 'account_number' ];
 
-    protected $encrypts = [];
+    //protected $encrypts = [];
 
 public function purchase(){
 

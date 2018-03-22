@@ -7,12 +7,12 @@ use Delatbabel\Elocrypt\Elocrypt;
 use DB;
 class Supplier extends Model
 {	
-   use Elocrypt;
+  // use Elocrypt;
 
    protected $table='supplier';
    protected $fillable = [ 'company_name','firstname', 'lastname', 'email', 'phone', 'gender', 'address', 'description', 'image', 'created_at', 'updated_at', 'status', 'verify', 'dob', 'account_number' ];
 
-    protected $encrypts = [];
+  // protected $encrypts = [];
     
 public function purchase(){
 

@@ -107,7 +107,7 @@
 @else
 
                     <tr>
-                        <td class="col-md-6" colspan="4">
+                        <td colspan="4">
                         No Item in Cart
                      </td>
                     </tr>

@@ -58,7 +58,6 @@ class AddMoneyController extends HomeController
        if(!Session::has('cart')){
             return redirect('customerprofile');
           }else{
-
             $oldCart=Session::get('cart');
             $cart=new Cart($oldCart);
             return view('site.shoppingcheckout',['totalPrice'=>$cart->totalPrice,'totalQty'=>$cart->totalQty]);
@@ -131,7 +130,9 @@ class AddMoneyController extends HomeController
     }
     public function getPaymentStatus()
     {
-        /** Get the payment ID before session clear **/
+
+        try {
+            /** Get the payment ID before session clear **/
         $payment_id = Session::get('paypal_payment_id');
         /** clear the session payment ID **/
         Session::forget('paypal_payment_id');
@@ -173,7 +174,11 @@ class AddMoneyController extends HomeController
             /** Here Write your database logic like that insert record or value in database if you want **/
             \Session::put('success','Payment Success');
             return Redirect::route('addmoney.paywithpaypal');
+          }
+        } catch (Exception $e) {
+            
         }
+        
         \Session::put('error','Payment failed');
         return Redirect::route('addmoney.paywithpaypal');
     }
@@ -216,11 +221,14 @@ class AddMoneyController extends HomeController
 
      $subject = 'Payment Invoice From MIS';
      $messages = 'Payment Invoice';
-
-      Mail::send('site.order_send_mail',compact('orders','exchange'), function ($message) use ($receiveby,$subject) {  
-        $message->to($receiveby)->subject($subject);       
-
+     
+     try {
+        Mail::send('site.order_send_mail',compact('orders','exchange'), function ($message) use ($receiveby,$subject) {  
+        $message->to($receiveby)->subject($subject);
      });
+    } catch (Exception $e) {
+        
+    }
 
    // return view('site.order_send_mail',compact('orders','exchange'));
     }

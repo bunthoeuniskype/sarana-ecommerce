@@ -32,7 +32,8 @@ class Employeecontroller extends Controller
         //create employee
         $employee = new employee();
         $req = $request->all();
-        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=> $employee->encryptedAttribute($request->account_number)));
+        //$data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=> $employee->encryptedAttribute($request->account_number)));
+         $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
         $employee->create($data);
         Session::flash('save','Save is Successfully !');
         return redirect('admin/employee/create');
@@ -41,7 +42,7 @@ class Employeecontroller extends Controller
     public function edit($id){  
 
         $employee = Employee::findorfail($id);
-        $employee->account_number = $employee->decryptedAttribute($employee->account_number);
+      //  $employee->account_number = $employee->decryptedAttribute($employee->account_number);
         return view('admin.employee.edit')
         ->with('employee', $employee);
 
@@ -51,8 +52,8 @@ class Employeecontroller extends Controller
 
         $employee = Employee::findorfail($id);
         $req = $request->all();
-        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),
-            'account_number'=>$employee->encryptedAttribute($request->account_number)));
+        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
+       // $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=>$employee->encryptedAttribute($request->account_number)));
         $employee->update($data);       
         Session::flash('save','Save is Successfully!');
         return redirect('admin/employee');

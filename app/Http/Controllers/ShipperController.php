@@ -35,7 +35,8 @@ class ShipperController extends Controller
         //create shipper
         $shipper = new shipper;
         $req = $request->all();
-        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=> $shipper->encryptedAttribute($request->account_number)));
+        //$data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=> $shipper->encryptedAttribute($request->account_number)));
+        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
         $shipper->create($data);
         Session::flash('save','Save is Successfully !');
         return redirect('admin/shipper/create');
@@ -44,7 +45,7 @@ class ShipperController extends Controller
     public function edit($id){  
 
         $shipper = Shipper::findorfail($id);
-        $shipper->account_number = $shipper->decryptedAttribute($shipper->account_number);
+       //$shipper->account_number = $shipper->decryptedAttribute($shipper->account_number);
         return view('admin.shipper.edit')
         ->with('shipper', $shipper);
 
@@ -54,8 +55,8 @@ class ShipperController extends Controller
 
         $shipper = Shipper::findorfail($id);
         $req = $request->all();
-        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),
-            'account_number'=>$shipper->encryptedAttribute($request->account_number)));
+       // $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=>$shipper->encryptedAttribute($request->account_number)));
+        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
         $shipper->update($data);       
         Session::flash('save','Save is Successfully!');
         return redirect('admin/shipper');

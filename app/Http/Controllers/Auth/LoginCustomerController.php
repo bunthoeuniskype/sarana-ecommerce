@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Customer;
 
 class LoginCustomerController extends Controller
 {
@@ -30,15 +31,20 @@ class LoginCustomerController extends Controller
         'password' => 'required|min:6'
       ]);
 
-      // Attempt to log the user in
-      if (Auth::guard('customer')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
-        // if successful, then redirect to their intended location       
-          return redirect()->intended('customerprofile');      
-      }
-
+      $cust = Customer::where('email',$request->username)->orWhere('username', $request->username)->first();
+      if($cust){
+         // Attempt to log the user in
+        if (Auth::guard('customer')->attempt(['username' => $cust->username, 'password' => $request->password,'status'=>1], $request->remember)) {
+          // if successful, then redirect to their intended location       
+            return redirect()->intended('customerprofile');      
+        }
+           // if unsuccessful, then redirect back to the login with the form data
+       \Session::flash('login','Invalid Email and Password!');
+       return redirect()->back()->withInput($request->only('username', 'remember'));
+      }   
       // if unsuccessful, then redirect back to the login with the form data
        \Session::flash('login','Invalid Email and Password!');
-      return redirect()->back()->withInput($request->only('email', 'remember'));
+      return redirect()->back()->withInput($request->only('username', 'remember'));
     }
 
     public function logout()

@@ -35,7 +35,8 @@ class SupplierController extends Controller
         //create Supplier
         $supplier = new Supplier;
         $req = $request->all();
-        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=> $supplier->encryptedAttribute($request->account_number)));
+        //$data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=> $supplier->encryptedAttribute($request->account_number)));
+        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
         $supplier->create($data);
         Session::flash('save','Save is Successfully !');
         return redirect('admin/supplier/create');
@@ -44,18 +45,17 @@ class SupplierController extends Controller
     public function edit($id){  
 
         $supplier = Supplier::findorfail($id);
-        $supplier->account_number = $supplier->decryptedAttribute($supplier->account_number);
+        //$supplier->account_number = $supplier->decryptedAttribute($supplier->account_number);
         return view('admin.supplier.edit')
         ->with('supplier', $supplier);
 
     }
 
     public function update(Request $request, $id){
-
         $supplier = Supplier::findorfail($id);
         $req = $request->all();
-        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),
-            'account_number'=>$supplier->encryptedAttribute($request->account_number)));
+      //$data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=>$supplier->encryptedAttribute($request->account_number)));
+        $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
         $supplier->update($data);       
         Session::flash('save','Save is Successfully!');
         return redirect('admin/supplier');
