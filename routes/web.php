@@ -55,7 +55,7 @@ Route::get('product-add-count-view/{id}',['uses'=>'HomeController@countView','as
 Route::post('product-rate',['uses'=>'HomeController@ratingProduct','as'=>'product.rating']);
 Route::get('/contact', 'HomeController@contact');
 Route::post('/feedback', ['uses'=>'HomeController@feedback','as'=>'feedback']);
-Route::post('/verify/email/{verify}', ['uses'=>'CustomerController@verify','as'=>'verify.email']);
+Route::get('/verify/email/{verify}', ['uses'=>'CustomerController@verify','as'=>'verify.email']);
 
 Route::get('/redirect', 'SocialAuthFacebookController@redirect');
 Route::get('/callback', 'SocialAuthFacebookController@callback');

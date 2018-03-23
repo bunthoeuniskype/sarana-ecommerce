@@ -96,7 +96,7 @@ class CustomerController extends Controller
         } catch (Exception $e) {
           
         }        
-        Session::flash('save','Email verify is success!');
+        Session::flash('login','Email verify is success!');
         return redirect('customerlogin');
     }
 
@@ -114,7 +114,8 @@ class CustomerController extends Controller
           $cust->username = $request->username;
           $cust->password =  bcrypt($request->password);
           $cust->email = $request->email;
-          $cust->phone = $request->phone;     
+          $cust->phone = $request->phone;   
+          $cust->status = 0; 
           $cust->verify = str_random(60);  
           $cust->save();
                     
@@ -123,13 +124,13 @@ class CustomerController extends Controller
          $messages = 'Your register is Success, Please Verify Email Address before login!';
          $url      = route('verify.email',$cust->verify);
          try {
-            Mail::send('site.order_send_mail',compact('url','messages'), function ($message) use ($receiveby,$subject) {  
+            Mail::send('site.verify_send_mail',compact('url','messages'), function ($message) use ($receiveby,$subject) {  
             $message->to($receiveby)->subject($subject);
          });
         } catch (Exception $e) {
             
         }
-      Session::flash('save','Save is Successfully !');
+      Session::flash('login','Please Verify Email Address before login!');
       return redirect('customerlogin');
     }   
 

@@ -56,7 +56,8 @@
                          <h4>Items Ordered</h4>
                          <hr>
                           @foreach ($orders as $order)
-                           <table class="table table-responsive table-bordered">    
+                             @if(count($order->cart->items)>0)
+                           <table class="table table-responsive table-bordered">
                               <tr>
                                 <td>Payment ID :  {{ $order['payment_id'] }}</td>   
                                 <td> 
@@ -76,15 +77,19 @@
                               <tr>
                                 <td colspan="2">
                                   <ul class="list-group" style="list-style: none;">
-                                    	@foreach($order->cart->items as $item)
-                                    	<li  class="list-group-item"> 
-                                    	<img src="{{ asset($item['item']['image']) }}" style="height: 50px;"> 
-                                  	 {{ $item['item']['name']  }} | QTY : {{ $item['qty']  }} Unit <span class="badge badge-success"> $ {{ $item['price']  }} </span></li>
-                                    	@endforeach	
+                                     
+                                   
+                                      @foreach($order->cart->items as $item)
+                                      <li  class="list-group-item"> 
+                                      <img src="{{ asset($item['item']['image']) }}" style="height: 50px;"> 
+                                     {{ $item['item']['name']  }} | QTY : {{ $item['qty']  }} Unit <span class="badge badge-success"> $ {{ $item['price']  }} </span></li>
+                                      @endforeach 
+                                    
                                   </ul>                                
                                 </td>
                               <tr>
                             </table>
+                           @endif    
                          @endforeach
                           </td>
                          <tr>

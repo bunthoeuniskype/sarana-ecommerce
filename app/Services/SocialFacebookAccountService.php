@@ -8,7 +8,7 @@ class SocialFacebookAccountService
     public function createOrGetUser(ProviderUser $providerUser)
     {
         
-        dd($providerUser);
+       // dd($providerUser);
 
         $userLogin = array();
          

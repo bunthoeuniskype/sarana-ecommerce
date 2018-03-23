@@ -23,7 +23,7 @@ class SocialAuthFacebookController extends Controller
     public function callback(SocialFacebookAccountService $service)
     {
         $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
-        Auth::guard('customer')->attempt(['email'=>$user['email'],'password_socail'=> $user['password']]);
+        Auth::guard('customer')->attempt(['email'=>$user['email'],'password'=> $user['password']]);
         return redirect()->to('/customerprofile');
     }
 
