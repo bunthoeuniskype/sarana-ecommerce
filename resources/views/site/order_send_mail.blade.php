@@ -72,8 +72,8 @@ table td {
                     <th width="10%">Tax</th>
                     <th width="15%">Amount</th>
                 </tr>
-
-               @foreach($order->cart->items as $item)
+              @if(count($order->cart->items)>0)
+                @foreach($order->cart->items as $item)
                 <tr>
                     <td>{{ $item['item']['barcode']}}</td>
                     <td>{{ $item['item']['name']}}</td>
@@ -83,7 +83,8 @@ table td {
                      <td>{{ $item['item']['tax']}} %</td>
                     <td style="white-space:nowrap;">$ {{$item['price']}}</td>
                 </tr>
-          @endforeach
+                @endforeach
+               @endif  
       </table>
 
       <table class="table table-bordered">
