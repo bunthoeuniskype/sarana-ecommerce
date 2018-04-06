@@ -46,24 +46,26 @@
         </thead>
         <body>
         <?php $i=1; ?>
+      
         @foreach($payowed as $value)
-          <tr>
+          @if($value->customerCheck($value->customer_id))
+           <tr>
             <td>{{ $i++ }}</td>      
               <td>{{ date("d-M-Y", strtotime($value->created_at)) }}</td>               
-            <td>{{ $value->customer->firstname.' '.$value->customer->lastname }}</td>             
+             <td>{{ $value->customer->firstname.' '.$value->customer->lastname }}</td>             
              <td>{{ $value->customer->gender }}</td>
               <td>{{ $value->customer->email }}</td>
-             <td>{{ $value->customer->phone }}</td>
+             <td>{{ $value->customer->phone }} </td>
              <td>{{ $value->total_amount }}</td>
              <td>{{ $value->total_paid }}</td>
              <td>{{ $value->total_amount -  $value->total_paid }}</td>
              <td>{{ $value->status==1?'Active':'Close' }}</td>
             <td>          
             <a href="{{ url('admin/pay-deposite/'.$value->id.'/payment') }}" class="btn btn-xs btn-primary"><i class="fa fa-dollar"></i> {{ trans('common.payment') }}</a>
-             <a href="{{ url('admin/pay-deposite/'.$value->id.'/view') }}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-search"></i> {{ trans('common.view') }}</a>
+            <a href="{{ url('admin/pay-deposite/'.$value->id.'/view') }}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-search"></i> {{ trans('common.view') }}</a>
             </td>
-              
-          </tr>
+           </tr>
+           @endif 
           @endforeach
         </body>
     </table>

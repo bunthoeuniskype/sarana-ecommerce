@@ -15,6 +15,14 @@ public function customer()
 {
    return $this->belongsTo('App\Customer','customer_id','id');
 }
+public function customerCheck($id)
+{
+  $data = Customer::where('id',$id)->first();
+  if($data){
+    return true;
+  }
+  return false;
+}
 public function user()
 {
    return $this->belongsTo('App\User','user_id','id');

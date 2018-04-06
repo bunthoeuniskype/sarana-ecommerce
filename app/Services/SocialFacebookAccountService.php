@@ -12,36 +12,47 @@ class SocialFacebookAccountService
 
         $userLogin = array();
          
-        $account = SocialFacebookAccount::whereProvider('facebook')
-            ->whereProviderUserId($providerUser->getId())
-            ->first();
+        // $account = SocialFacebookAccount::whereProvider('facebook')
+        //     ->whereProviderUserId($providerUser->getId())
+        //     ->first();
             
-        if ($account) {
-            $userLogin['password'] = $providerUser->getId();
-            $userLogin['email'] = $providerUser->getEmail();
-            return $userLogin;
-            //return $account->user;
-        } else {
-            $account = new SocialFacebookAccount([
-                'provider_user_id' => $providerUser->getId(),
-                'provider' => 'facebook'
-            ]);
-            $user = CustomerAuth::whereEmail($providerUser->getEmail())->first();
+            $user = CustomerAuth::where('facebook_id',$providerUser->getId())->first();
             if (!$user) {
                 $user = CustomerAuth::create([
                     'email' => $providerUser->getEmail(),
                     'image_socail' => $providerUser->getAvatar(),
                     'username' => $providerUser->getName(),
+                    'facebook_id' => $providerUser->getId(),
                     'password_socail' => bcrypt($providerUser->getId())
                 ]);
             }
-            $account->user()->associate($user);
-            $account->save();
+          
+        // if ($account) {
+        //     $userLogin['password'] = $providerUser->getId();
+        //     $userLogin['email'] = $providerUser->getEmail();
+        //     return $userLogin;
+        //     //return $account->user;
+        // } else {
+        //     $account = new SocialFacebookAccount([
+        //         'provider_user_id' => $providerUser->getId(),
+        //         'provider' => 'facebook'
+        //     ]);
+        //     $user = CustomerAuth::whereEmail($providerUser->getEmail())->first();
+        //     if (!$user) {
+        //         $user = CustomerAuth::create([
+        //             'email' => $providerUser->getEmail(),
+        //             'image_socail' => $providerUser->getAvatar(),
+        //             'username' => $providerUser->getName(),
+        //             'password_socail' => bcrypt($providerUser->getId())
+        //         ]);
+        //     }
+        //     $account->user()->associate($user);
+        //     $account->save();
             
-            $userLogin['password'] = $providerUser->getId();
-            $userLogin['email'] = $providerUser->getEmail();
-            
+        //     $userLogin['password'] = $providerUser->getId();
+        //     $userLogin['email'] = $providerUser->getEmail();
+            $userLogin['id']=$user->id;
             return $userLogin;
-        }
+        
     }
 }
