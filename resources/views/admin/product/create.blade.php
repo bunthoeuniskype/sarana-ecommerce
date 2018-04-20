@@ -55,7 +55,7 @@
                          <div class="col-xs-6">
                          <div class="form-group">
                         <div class="form-label col-xs-12">
-                            {!! Form::label('subcategory_id',trans('common.sub_category')) !!} <span class="text-danger">*</span>
+                            {!! Form::label('subcategory_id',trans('common.sub_category')) !!} <!-- <span class="text-danger">*</span> -->
                         </div>
                        <div class="input-group from-group col-xs-12">                       
                         {!! Form::select('subcategory_id',$subcategories,null,array('class'=>'form-control')) !!} 
@@ -304,6 +304,27 @@ $("#color" ).autocomplete({
     return false; 
   } 
     });
+
+
+    $('#category_id').on('change',function(){
+   var id = $(this).val();
+   $('#subcategory_id').html('');
+  
+     $.get('{{url("/sub_category/byid")}}?id='+id,function(data){      
+      
+      if(data.length==0){
+         htmldata = '<option value="" selected="selected">-- No Sub Category</option>';
+         $('#subcategory_id').append(htmldata);
+      }else{
+         htmldata = '<option value="" selected="selected">-- Select Sub Category</option>';
+         $('#subcategory_id').append(htmldata);
+        $.each( data, function( key, val ) {
+          htmldata = '<option value="'+val.id+'">'+val.name+'</option>';
+          $('#subcategory_id').append(htmldata);
+        });
+      }
+    })
+  });
 
   } );
   </script>

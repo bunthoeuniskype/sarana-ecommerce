@@ -36,9 +36,9 @@ class ProductController extends Controller
 
         $subcategories=array();
         $subcategories['']='-- Select Sub Category';
-        foreach (SubCategory::where(['status'=>1,'language_code'=>App::getLocale()])->get() as $subc) {
-          $subcategories[$subc->group_id]=$subc->name;
-        }   
+        // foreach (SubCategory::where(['status'=>1,'language_code'=>App::getLocale()])->get() as $subc) {
+        //   $subcategories[$subc->group_id]=$subc->name;
+        // }   
  
         return view('admin.product.create',compact('subcategories','categories'));
 
@@ -49,7 +49,7 @@ class ProductController extends Controller
 
         $request->validate([
             'category_id' => 'required',
-            'subcategory_id' => 'required',
+            //'subcategory_id' => 'required',
             'name' => 'required|unique:product',
             'barcode' => 'required|unique:product',
             'cost' => 'required|numeric',
@@ -60,7 +60,7 @@ class ProductController extends Controller
             'tax' => 'required|numeric',
         ],[
             'category_id' => ['required' => 'Category is required!'],
-            'subcategory_id' => ['required' => 'Sub Category is required!'],
+           // 'subcategory_id' => ['required' => 'Sub Category is required!'],
         ]);
 
         $slug = str_random(30).''.date('Ymdhis');
@@ -84,7 +84,7 @@ class ProductController extends Controller
 
         $subcategories=array();
         $subcategories['']='-- Select Sub Category';
-        foreach (SubCategory::where(['status'=>1,'language_code'=>App::getLocale()])->get() as $subc) {
+        foreach (SubCategory::where(['status'=>1,'language_code'=>App::getLocale(),'category_group_id'=>$product->category_id])->get() as $subc) {
           $subcategories[$subc->group_id]=$subc->name;
         }   
  
@@ -120,7 +120,7 @@ class ProductController extends Controller
         
         $request->validate([
             'category_id' => 'required',
-            'subcategory_id' => 'required',
+           // 'subcategory_id' => 'required',
              'name' => 'required|unique:product,name,'.$product->id.',id',
             'barcode' => 'required|unique:product,barcode,'.$product->id.',id',
             'cost' => 'required|numeric',
@@ -131,7 +131,7 @@ class ProductController extends Controller
             'tax' => 'required|numeric',
         ],[
             'category_id' => ['required' => 'Category is required!'],
-            'subcategory_id' => ['required' => 'Sub Category is required!'],
+            //'subcategory_id' => ['required' => 'Sub Category is required!'],
         ]);
 
         //create product

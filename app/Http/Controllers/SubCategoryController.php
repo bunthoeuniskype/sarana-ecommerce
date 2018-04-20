@@ -94,6 +94,7 @@ class SubCategoryController extends Controller
       $category = Category::select(['name','id'])->where('status',1)->orderBy('id','DESC')->get();
       return response()->json($category);
     }
+    
 
     /**
      * Display the specified resource.

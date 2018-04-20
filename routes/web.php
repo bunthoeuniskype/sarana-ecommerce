@@ -79,6 +79,9 @@ Route::get('/', 'ShoppingController@index');
 Route::get('category/{slug}', 'ShoppingController@byCategory');
 Route::get('/subcategory/{slug}', 'ShoppingController@bySubCategory');
 
+Route::get('/sub_category/byid', 'SubCategoryController@select_sub_category');
+
+
 Route::get('/addtocart/{id}', array(
 	'uses' => 'ShoppingController@AddToCart',
 	'as' => 'shopping.addtocart'

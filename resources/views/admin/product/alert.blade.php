@@ -9,10 +9,7 @@
                            Product
                            <small>Alert Products</small>
                            </h1>
-                            
-                  
-
-                        
+                                                    
                         <div class="panel-body">
                         <!-- show error input-->
                          @include('admin/common/errors')
