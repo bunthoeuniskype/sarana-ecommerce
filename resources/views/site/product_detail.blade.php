@@ -99,7 +99,12 @@ use App\Exchange;
 						<div class="controls">
 						 <label class="control-label">Color :</span> 
 						  <select class="span2">
-							  <option>{{$product->color}}</option>						 
+						  	<?php 
+						  		$arrColor = explode(',', $product->color);
+						  		foreach ($arrColor as $key => $val) {
+						  		?>
+							  <option>{{$val}}</option>						 
+						  	<?php } ?>
 							</select>
 						</div>
 						
