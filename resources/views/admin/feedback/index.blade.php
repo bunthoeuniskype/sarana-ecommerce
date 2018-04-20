@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('admin.layout.master_side')
 
 @section('script')
 

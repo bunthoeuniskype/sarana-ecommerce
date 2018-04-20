@@ -188,6 +188,8 @@ Route::get('admin/report/expense_income', 'ReportController@expense_income');
 Route::get('admin/report/inventory', 'ReportController@inventory');
 Route::get('admin/report/sale', 'ReportController@sale');
 Route::get('admin/report/purchase', 'ReportController@purchase');
+Route::get('admin/feedback','FeedbackController@index');
+Route::get('admin/feedback/{id}/view','FeedbackController@view');
 //end admin
 });
 

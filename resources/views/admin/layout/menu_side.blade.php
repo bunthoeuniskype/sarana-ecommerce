@@ -3,7 +3,7 @@
     position: fixed;
     top: 92px;
     left: 0px;
-    width: 200px;
+    width: 25%;
     margin-left: 0px;
     border: none;
     border-radius: 0;
@@ -12,6 +12,7 @@
     bottom: 0;
     overflow-x: hidden;
     padding-bottom: 40px;
+    min-height: 450px;
 }
 
 </style>
@@ -23,7 +24,9 @@
                     <li class="active">
                         <a href="{{ url('/') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>                
-
+                     <li>
+                         <a href="{{url('admin/feedback')}}"><i class="fa fa-envelope fa-fw"></i>{{ trans('Contact')}}</a>
+                    </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#Trans"><i class="fa fa-cube" aria-hidden="true"></i> Others <i class="fa fa-fw fa-caret-down"></i></a>
                    <ul id="Trans" class="collapse">

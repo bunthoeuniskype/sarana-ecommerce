@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Modules\Admin\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Modules\Site\Models\Feedback;
+use App\Contact;
 use App\Language;
 use Auth;
 use Session;
@@ -23,14 +22,14 @@ class FeedbackController extends Controller
      */
     public function index()
     {     
-       $feedback = Feedback::orderBy('id','DESC')->get();         
-       return view("Admin::feedback.index",compact('feedback'));
+       $feedback = Contact::orderBy('id','DESC')->get();         
+       return view("admin.feedback.index",compact('feedback'));
     }
 
       public function view($id)
     {     
-       $feedback = Feedback::findOrFail($id);         
-       return view("Admin::feedback.view",compact('feedback'));
+       $feedback = Contact::findOrFail($id);         
+       return view("admin.feedback.view",compact('feedback'));
     }
 
     /**
