@@ -47,6 +47,22 @@ class ProductController extends Controller
         
         $input = $request->all();   
 
+        $request->validate([
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'name' => 'required|unique:product',
+            'barcode' => 'required|unique:product',
+            'cost' => 'required|numeric',
+            'price' => 'required|numeric',
+            'qty' => 'required|integer',
+            'qty_alert' => 'required|integer',
+            'discount' => 'required|numeric',
+            'tax' => 'required|numeric',
+        ],[
+            'category_id' => ['required' => 'Category is required!'],
+            'subcategory_id' => ['required' => 'Sub Category is required!'],
+        ]);
+
         $slug = str_random(30).''.date('Ymdhis');
         $input['user_id'] = Auth::user()->id;
         $input['slug'] = $slug;        
@@ -101,7 +117,23 @@ class ProductController extends Controller
     public function update(Request $request, $id){
 
         $product = Product::findorfail($id);        
-     
+        
+        $request->validate([
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+             'name' => 'required|unique:product,name,'.$product->id.',id',
+            'barcode' => 'required|unique:product,barcode,'.$product->id.',id',
+            'cost' => 'required|numeric',
+            'price' => 'required|numeric',
+            'qty' => 'required|integer',
+            'qty_alert' => 'required|integer',
+            'discount' => 'required|numeric',
+            'tax' => 'required|numeric',
+        ],[
+            'category_id' => ['required' => 'Category is required!'],
+            'subcategory_id' => ['required' => 'Sub Category is required!'],
+        ]);
+
         //create product
         $input = $request->all();        
         $input['user_id'] = Auth::user()->id;  

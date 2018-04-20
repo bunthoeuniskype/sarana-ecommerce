@@ -30,7 +30,7 @@
                         <div class="col-xs-6">
                          <div class="form-group">
                         <div class="form-label col-xs-12">
-                            {!! Form::label('firstname','First Name: ') !!}
+                            {!! Form::label('firstname','First Name: ') !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
                         {!! Form::text('firstname',null,array('class'=>'form-control','required'=>true)) !!}
@@ -41,7 +41,7 @@
                          <div class="col-xs-6">
                          <div class="form-group">
                         <div class="form-label col-xs-12">
-                            {!! Form::label('lastname','Last Name : ') !!}
+                            {!! Form::label('lastname','Last Name : ') !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
                         {!! Form::text('lastname',null,array('class'=>'form-control','required'=>true)) !!}
@@ -52,7 +52,7 @@
                          <div class="col-xs-6">
                          <div class="form-group">
                         <div class="form-label col-xs-12">
-                            {!! Form::label('company_name','Company Name : ') !!}
+                            {!! Form::label('company_name','Company Name : ') !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
                         {!! Form::text('company_name',null,array('class'=>'form-control','required'=>true)) !!}
@@ -63,8 +63,8 @@
                          <div class="col-xs-6">
                         <div class="form-group">
                          <div class="form-label col-xs-12">
-                            {!! Form::label('gender','Gender : ') !!}
-                        </div>
+                            {!! Form::label('gender','Gender : ') !!} <span class="text-danger">*</span>
+                        </div> 
                        <div class="input-group from-group col-xs-12">                       
                         {{ Form::select('gender', ['' => 'Select Gender','Male' => 'Male', 'Female' => 'Female'],null, ['class' => 'form-control']) }}
                         </div>
@@ -86,7 +86,7 @@
                          <div class="col-xs-6">
                          <div class="form-group">
                          <div class="form-label col-xs-12">
-                            {!! Form::label('email','Email: ') !!}
+                            {!! Form::label('email','Email: ') !!} <span class="text-danger">*</span>
                         </div>
                          <div class="input-group from-group col-xs-12">                        
                         {!! Form::text('email',null,array('class'=>'form-control')) !!}
@@ -97,7 +97,7 @@
                          <div class="col-xs-6">
                          <div class="form-group">
                          <div class="form-label col-xs-12">
-                            {!! Form::label('phone','Phone: ') !!}
+                            {!! Form::label('phone','Phone: ') !!} <span class="text-danger">*</span>
                         </div>
                          <div class="input-group from-group col-xs-12">                        
                         {!! Form::text('phone',null,array('class'=>'form-control')) !!}
@@ -108,7 +108,7 @@
                         <div class="col-xs-6">
                         <div class="form-group">
                         <div class="form-label col-xs-12">
-                            {!! Form::label('address','Address: ') !!}
+                            {!! Form::label('address','Address: ') !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
                         {!! Form::text('address',null,array('class'=>'form-control')) !!}

@@ -25,7 +25,7 @@
                 @endif
 
 
-        {!! Form::open(array('url'=>'admin/product','files'=>true)) !!}
+                 {!! Form::open(array('url'=>'admin/product','files'=>true)) !!}
 
                         {{ csrf_field() }}
 
@@ -44,7 +44,7 @@
                         <div class="col-xs-6">
                          <div class="form-group">
                         <div class="form-label col-xs-12">
-                            {!! Form::label('category_id',trans('common.category')) !!}
+                            {!! Form::label('category_id',trans('common.category')) !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
                         {!! Form::select('category_id',$categories,null,array('class'=>'form-control')) !!}
@@ -55,10 +55,10 @@
                          <div class="col-xs-6">
                          <div class="form-group">
                         <div class="form-label col-xs-12">
-                            {!! Form::label('subcategory_id',trans('common.sub_category')) !!}
+                            {!! Form::label('subcategory_id',trans('common.sub_category')) !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
-                        {!! Form::select('subcategory_id',$subcategories,null,array('class'=>'form-control')) !!}
+                        {!! Form::select('subcategory_id',$subcategories,null,array('class'=>'form-control')) !!} 
                         </div>
                         </div>
                         </div>
@@ -66,10 +66,10 @@
                          <div class="col-xs-6">
                          <div class="form-group">
                         <div class="form-label col-xs-12">
-                            {!! Form::label('barcode',trans('common.barcode')) !!}
+                            {!! Form::label('barcode',trans('common.barcode')) !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
-                        {!! Form::text('barcode',null,array('class'=>'form-control')) !!}
+                        {!! Form::text('barcode',null,array('class'=>'form-control')) !!} 
                         </div>
                         </div>
                         </div>
@@ -77,7 +77,7 @@
                          <div class="col-xs-6">
                         <div class="form-group">
                          <div class="form-label col-xs-12">
-                            {!! Form::label('name',trans('common.name')) !!}
+                            {!! Form::label('name',trans('common.name')) !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
                         {{ Form::text('name',null, ['class' => 'form-control']) }}
@@ -88,7 +88,7 @@
                         <div class="col-xs-6">
                         <div class="form-group">
                          <div class="form-label col-xs-12">
-                            {!! Form::label('cost',trans('common.cost')) !!}
+                            {!! Form::label('cost',trans('common.cost')) !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
                         {!! Form::text('cost',0,array('class'=>'form-control')) !!}
@@ -99,7 +99,7 @@
                         <div class="col-xs-6">
                          <div class="form-group">
                          <div class="form-label col-xs-12">
-                            {!! Form::label('price',trans('common.price')) !!}
+                            {!! Form::label('price',trans('common.price')) !!} <span class="text-danger">*</span>
                         </div>
                          <div class="input-group from-group col-xs-12">                        
                         {!! Form::text('price',0,array('class'=>'form-control')) !!}
@@ -110,10 +110,10 @@
                          <div class="col-xs-6">
                         <div class="form-group">
                         <div class="form-label col-xs-12">
-                         {!! Form::label('qty',trans('common.qty')) !!}
+                         {!! Form::label('qty',trans('common.qty')) !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
-                        {!! Form::text('qty',0,array('class'=>'form-control')) !!}
+                        {!! Form::text('qty',0,array('class'=>'form-control')) !!} 
                         </div>
                         </div>
                         </div>  
@@ -121,7 +121,7 @@
                         <div class="col-xs-6">
                         <div class="form-group">
                         <div class="form-label col-xs-12">
-                         {!! Form::label('qty_alert',trans('common.qty_alert')) !!}
+                         {!! Form::label('qty_alert',trans('common.qty_alert')) !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
                         {!! Form::text('qty_alert',0,array('class'=>'form-control')) !!}
@@ -132,7 +132,7 @@
                       <div class="col-xs-6">
                         <div class="form-group">
                         <div class="form-label col-xs-12">
-                         {!! Form::label('discount',trans('common.discount')) !!}
+                         {!! Form::label('discount',trans('common.discount')) !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
                         {!! Form::text('discount',0,array('class'=>'form-control')) !!}
@@ -143,7 +143,7 @@
                            <div class="col-xs-6">
                         <div class="form-group">
                         <div class="form-label col-xs-12">
-                         {!! Form::label('tax',trans('common.tax')) !!}
+                         {!! Form::label('tax',trans('common.tax')) !!} <span class="text-danger">*</span>
                         </div>
                        <div class="input-group from-group col-xs-12">                       
                         {!! Form::text('tax',0,array('class'=>'form-control')) !!}

@@ -35,10 +35,9 @@ function setNavigation() {
   }
 </style>
 
-    <img class="img" src="{{url('public/uploads/images/logo.png')}}" style="height: 99px;margin-top: -17px;margin-left: -21px;float: left;margin-right: -19px;">
+    <img class="img" src="{{url('public/uploads/images/logo.png')}}" style="    height: 58px; margin-top: 0px; margin-left: 6px;
+    float: left; margin-right: 5px;">
 <ul id="menu">
-
-
 <li>
           <a href="{{ url('admin') }}" title="Home" style="border-left: 1px solid #999;">
                  <i class="fa fa-home" aria-hidden="true" style="padding-bottom: 3px;"></i>

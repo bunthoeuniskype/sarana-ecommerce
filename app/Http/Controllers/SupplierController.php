@@ -32,6 +32,17 @@ class SupplierController extends Controller
 
     public function store(Request $request){           
 
+          $this->validate($request,[           
+            'firstname' => 'required',
+            'lastname' => 'required',   
+            'company_name' => 'required',
+            'email' => 'required|email|unique:supplier',
+            'firstname' => 'required',        
+            'gender' => 'required',          
+            'phone' => 'required',
+            'address' => 'required',
+            ]);
+
         //create Supplier
         $supplier = new Supplier;
         $req = $request->all();
@@ -54,6 +65,18 @@ class SupplierController extends Controller
     public function update(Request $request, $id){
         $supplier = Supplier::findorfail($id);
         $req = $request->all();
+         
+          $this->validate($request,[           
+            'firstname' => 'required',
+            'lastname' => 'required',   
+            'company_name' => 'required',
+            'email' => 'required|email|unique:supplier,email,'.$supplier->id.',id',
+            'firstname' => 'required',        
+            'gender' => 'required',          
+            'phone' => 'required',
+            'address' => 'required',
+            ]);
+
       //$data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=>$supplier->encryptedAttribute($request->account_number)));
         $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
         $supplier->update($data);       

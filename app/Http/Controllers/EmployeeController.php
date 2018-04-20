@@ -31,6 +31,16 @@ class Employeecontroller extends Controller
 
         //create employee
         $employee = new employee();
+
+
+          $this->validate($request,[           
+            'firstname' => 'required',
+            'lastname' => 'required',           
+            'gender' => 'required',          
+            'phone' => 'required',
+            'address' => 'required',
+            ]); 
+
         $req = $request->all();
         //$data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=> $employee->encryptedAttribute($request->account_number)));
          $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
@@ -52,6 +62,15 @@ class Employeecontroller extends Controller
 
         $employee = Employee::findorfail($id);
         $req = $request->all();
+
+          $this->validate($request,[           
+            'firstname' => 'required',
+            'lastname' => 'required',           
+            'gender' => 'required',          
+            'phone' => 'required',
+            'address' => 'required',
+            ]); 
+
         $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
        // $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=>$employee->encryptedAttribute($request->account_number)));
         $employee->update($data);       

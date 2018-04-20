@@ -183,6 +183,16 @@ class CustomerController extends Controller
       //create customer
         $customer = new Customer();
         $req = $request->all();
+
+
+          $this->validate($request,[           
+            'firstname' => 'required',
+            'lastname' => 'required',           
+            'gender' => 'required',          
+            'phone' => 'required',
+            'address' => 'required',
+            ]); 
+
         $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
      //   $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=> $customer->encryptedAttribute($request->account_number)));
         $customer->create($data);
@@ -202,6 +212,16 @@ class CustomerController extends Controller
     public function update(Request $request, $id){
 
         $customer = Customer::findorfail($id);
+
+           $this->validate($request,[           
+            'firstname' => 'required',
+            'lastname' => 'required',           
+            'gender' => 'required',          
+            'phone' => 'required',
+            'address' => 'required',
+            ]); 
+
+
         $req = $request->all();
         $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
       //  $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),  'account_number'=>$customer->encryptedAttribute($request->account_number)));

@@ -46,23 +46,32 @@
 <div class="row" style="margin: 0px;">
  
     <div class="col-xs-12">
-       <div style="background-color: #76ad94;min-height: 60px;"> 
+       <div style="background-color: #76ad94;    min-height: 83px;"> 
        @include('admin.layout.menu_header')
        </div>
      </div>    
 
-     <div  class="col-xs-12" style="clear: both; margin-top: -24px;background: beige; margin-bottom: 20px;">
-                <div style="float: right;">
- 
-        {{ Form::Open(array('url'=>'locale','method'=>'post')) }}
-                                {{csrf_field()}}
-                              <table><tr><td><label>{{trans('common.language')}} : </label></td> <td>{{ Form::select('locale',['en'=>trans('common.english'),'kh'=>trans('common.khmer')],App::getLocale(),array("class"=>"form-control",'id'=>'control_language','onchange'=>'this.form.submit()'))}}</td>
-                              </tr></table>
-                              {{ Form::Close() }}   
+ <div  class="col-xs-12" style="clear: both; margin-top: -24px;background: beige; margin-bottom: 20px;">
 
-  </div>
-<div  style="float:left">
+ <div  style="float:left">
   <h5 style="color: #000; margin-top: 7px; margin-bottom: 6px; padding-right: 3px;"> {{ trans('common.user') }} : {{ Auth::user()->name }}  <span><a href="{{ Route('user.logout') }}" style="color:#fd1e1e;"><i class="fa fa-sign-out" aria-hidden="true"></i>{{ trans('common.exit') }}</a></span></h5> 
+  </div>
+  <div style="float: left;"> 
+    {{ Form::Open(array('url'=>'locale','method'=>'post')) }}
+      {{csrf_field()}}
+          <table>
+            <tr>
+            <td>&nbsp; &nbsp; 
+             <label>{{trans('common.language')}} : </label> &nbsp;</td>
+               <td>{{ Form::select('locale',['en'=>trans('common.english'),'kh'=>trans('common.khmer')],App::getLocale(),array("class"=>"form-control",'id'=>'control_language','onchange'=>'this.form.submit()'))}}</td>
+             </tr>
+            </table>
+       {{ Form::Close() }}   
+  </div>
+  <div style="float:right">
+    <a class="btn btn-xs btn-primary" href="{{url('admin/orders')}}" style="margin-right: 5px; margin-top: 5px;">View Orders</a>
+    @include('admin.main.productAlert') 
+    @include('admin.main.orderAlert')
   </div>
  </div>
 

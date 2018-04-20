@@ -32,6 +32,18 @@ class ShipperController extends Controller
 
     public function store(Request $request){           
 
+
+          $this->validate($request,[           
+            'firstname' => 'required',
+            'lastname' => 'required',   
+            'company_name' => 'required',
+            'email' => 'required|email|unique:shipper',
+            'firstname' => 'required',        
+            'gender' => 'required',          
+            'phone' => 'required',
+            'address' => 'required',
+            ]); 
+
         //create shipper
         $shipper = new shipper;
         $req = $request->all();
@@ -55,6 +67,18 @@ class ShipperController extends Controller
 
         $shipper = Shipper::findorfail($id);
         $req = $request->all();
+
+         $this->validate($request,[           
+            'firstname' => 'required',
+            'lastname' => 'required',   
+            'company_name' => 'required',
+            'email' => 'required|email|unique:shipper,email,'.$shipper->id.',id',
+            'firstname' => 'required',        
+            'gender' => 'required',          
+            'phone' => 'required',
+            'address' => 'required',
+            ]);
+
        // $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob)),'account_number'=>$shipper->encryptedAttribute($request->account_number)));
         $data = array_merge($req,array('dob' => date('Y-m-d', strtotime($request->dob))));
         $shipper->update($data);       
