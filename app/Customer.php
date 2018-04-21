@@ -12,7 +12,7 @@ class Customer extends Model
 	//use Elocrypt;
 
 	protected $table='customer';
-    protected $fillable = [ 'firstname', 'lastname', 'email', 'phone', 'gender', 'address', 'description', 'image', 'created_at', 'updated_at', 'status', 'verify', 'dob', 'account_number' ];
+    protected $fillable = [ 'firstname', 'lastname', 'email', 'phone', 'gender', 'address', 'description', 'image', 'created_at', 'updated_at', 'status', 'verify', 'dob', 'account_number','facebook_id' ];
 
    // protected $encrypts = [];
 

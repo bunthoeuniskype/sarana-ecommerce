@@ -22,8 +22,12 @@ class SocialAuthFacebookController extends Controller
      */
     public function callback(SocialFacebookAccountService $service)
     {
-        $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
-        Auth::guard('customer')->loginUsingId($user['id']);
+       // \Artisan::call('cache:clear');
+       // exit;
+        $user = $service->createOrGetUser(Socialite::driver('facebook')->stateless()->user());
+       
+        $userdata = Auth::guard('customer')->loginUsingId($user['id']);
+       
         return redirect()->to('/customerprofile');
     }
 

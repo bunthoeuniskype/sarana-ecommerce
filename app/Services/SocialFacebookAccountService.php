@@ -8,23 +8,23 @@ class SocialFacebookAccountService
     public function createOrGetUser(ProviderUser $providerUser)
     {
         
-       // dd($providerUser);
 
-        $userLogin = array();
+         $userLogin = array();
          
         // $account = SocialFacebookAccount::whereProvider('facebook')
         //     ->whereProviderUserId($providerUser->getId())
         //     ->first();
-            
-            $user = CustomerAuth::where('facebook_id',$providerUser->getId())->first();
+            $idFb = $providerUser->getId();
+            $user = CustomerAuth::where('facebook_id',$idFb)->first();
             if (!$user) {
-                $user = CustomerAuth::create([
-                    'email' => $providerUser->getEmail(),
-                    'image_socail' => $providerUser->getAvatar(),
-                    'username' => $providerUser->getName(),
-                    'facebook_id' => $providerUser->getId(),
-                    'password_socail' => bcrypt($providerUser->getId())
-                ]);
+                
+                $user = new CustomerAuth;
+                $user->email = $providerUser->getEmail();
+              //  $user->image_socail = $providerUser->getAvatar();
+                $user->username = $providerUser->getName();
+                $user->facebook_id = $idFb;
+               //$user->password_socail = bcrypt($idFb);
+               $user->save();
             }
           
         // if ($account) {
