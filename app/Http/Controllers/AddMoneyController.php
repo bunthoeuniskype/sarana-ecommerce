@@ -72,19 +72,24 @@ class AddMoneyController extends HomeController
     public function postPaymentWithpaypal(Request $request)
     {
 
+        $cartData = Session::get('cart');
+        if(!$cartData){
+            return redirect('/');
+        }
+
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
         $item_1 = new Item();
-        $item_1->setName('Item 1') /** item name **/
+        $item_1->setName('Total Items') /** item name **/
             ->setCurrency('USD')
             ->setQuantity(1)
-            ->setPrice($request->amount); /** unit price **/
+            ->setPrice($cartData->totalPrice); /** unit price **/
         $item_list = new ItemList();
         $item_list->setItems(array($item_1));
         $amount = new Amount();
         $amount->setCurrency('USD')
-            ->setTotal($request->amount);
+            ->setTotal($cartData->totalPrice);
         $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($item_list)
