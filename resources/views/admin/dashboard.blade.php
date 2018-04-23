@@ -68,7 +68,7 @@
                 </div>
  </div>  
 @endif
-@if(checkPermission(['admin']))
+@if(checkPermission(['admin','account']))
  <div class="col-md-3 col-sm-3">
                 <div class="tile-stats tile-white">
                <a href="{{url('admin/employee')}}">

@@ -106,7 +106,7 @@ function setNavigation() {
 </li>
 @endif
 
-@if(checkPermission(['admin']))
+@if(checkPermission(['admin','account']))
 <li>
 <a href="{{url('admin/employee')}}" title="">
                  <i class="fa fa-users" aria-hidden="true" style="padding-bottom: 3px;"></i>
