@@ -44,7 +44,7 @@ class UserController extends Controller
           $employees[$employee->id]=$employee->firstname.' '.$employee->lastname;
         }
 
-        $roles = array(''=>'-- select Role --','User'=>'User','Admin'=>'Admin','Seller'=>'Seller','Stock'=>'Stock');
+        $roles = array(''=>'-- select Role --','admin'=>'Admin','sale'=>'Seller','stock'=>'Stock','account'=>'Account');
 
        
     	return view('admin.user.create', compact('employees','roles'));
@@ -63,7 +63,7 @@ class UserController extends Controller
 
       $user = new User;     
       $user->employee_id = $request->employee_id;
-      $user->role = $request->role;
+      $user->role = lcfirst($request->role);
       $user->name = $request->name;
       $user->email = $request->email;      
       $user->password = bcrypt($request->password);    
@@ -82,7 +82,7 @@ class UserController extends Controller
           $employees[$employee->id]=$employee->firstname.' '.$employee->lastname;
         }
 
-        $roles = array(''=>'-- select Role --','User'=>'User','Admin'=>'Admin','Seller'=>'Seller','Stock'=>'Stock');
+        $roles = array(''=>'-- select Role --','admin'=>'Admin','sale'=>'Seller','stock'=>'Stock','account'=>'Account');
 
       $user = User::findorfail($id);
       return view('admin.user.edit',compact('employees','roles','user'));
@@ -108,7 +108,7 @@ class UserController extends Controller
       $user->employee_id = $request->Input('employee_id');
       $user->name = $request->Input('name');
       $user->email = $request->Input('email');      
-      $user->role = $request->Input('role');
+      $user->role = lcfirst($request->Input('role'));
       $user->remember_token = $request->Input('_token');
       $user->save();
       Session::flash('save','Save is Successfully !');
